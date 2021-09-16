@@ -1,2 +1,53 @@
-# EDA-Best-Practices
-Step By Step Process to Perfrom Exploratory Data Analysis with Code Samples and Example Notebooks. 
+### Exploratory Data Analysis + (Feature Engineering,Dimensionality Reduction)
+
+### Step 1] Handle Missing Values
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
