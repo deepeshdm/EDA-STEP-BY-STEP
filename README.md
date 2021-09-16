@@ -18,6 +18,9 @@
 
 ### Step 1] Variable Identification
 
+```python
+print("Write your code here")
+```
 
 
 
