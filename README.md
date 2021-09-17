@@ -195,7 +195,18 @@ for feature in continuous_features:
 
 ## Analyze Categorical Variables
 
+* Find number of categorical features in dataset
+```python
+# list of all categorical variables in dataset
+categorical_features=[feature for feature in df.columns if df[feature].dtypes=='O']
 
+print('Number of categorical variables: ', len(categorical_features))
+
+# visualise the numerical variables
+df[categorical_features].head()
+```
+
+##### NOTE : Categorical variables are usually of 2 type : Nominal & Ordinal.Depending on the problem at hand the encoding used is different.But mostly we use ONE-HOT encoding for nominal variable & Label encoding for ordinal variable
 
 
 
