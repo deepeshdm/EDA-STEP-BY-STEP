@@ -474,7 +474,7 @@ df = df.drop(categorical_features,axis="columns")
 
 
 ## Embedded Methods (feature selection)
-### Embedded methods combine the qualities’ of filter and wrapper methods. It’s implemented by algorithms that have their own built-in feature selection methods.The most typical embedded technique is decision tree algorithm. Decision tree algorithms select a feature in each recursive step of the tree growth process and divide the sample set into smaller subsets.
+#### Embedded methods combine the qualities’ of filter and wrapper methods. It’s implemented by algorithms that have their own built-in feature selection methods.The most typical embedded technique is decision tree algorithm. Decision tree algorithms select a feature in each recursive step of the tree growth process and divide the sample set into smaller subsets.
 
 **some commonly Implemented embedded methods :**
 1. Decision Tree
