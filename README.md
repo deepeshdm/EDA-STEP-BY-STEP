@@ -137,6 +137,8 @@ for feature in continuous_features:
 # of plots and it wont be possible to visualize them all at once. 
 # You can use "df.corr()" to find the correlation among the features
 
+# Eg : If you have 10 continuous features,then it'll create (10x10)=100 scatterplots
+
 # Plotting Scatterplots of each continuous feature against TARGET_FEATURE
 for feature1 in continuous_features:
     for feature2 in continuous_features:
