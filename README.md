@@ -53,6 +53,7 @@ features_with_na = [feature for feature in df.columns if df[feature].isnull().su
 for feature in features_with_na :
     print(feature,"  ",np.round(df[feature].isnull().mean(),4),"% missing values")
 ```
+
 ##### NOTE : In order to decide if we should remove or keep the features with missing/null values we need to find their relationship with the dependent variable and see if they are of any significance.
 
 * Plot Bar-Graphs of TARGET_FEATURE against features with missing/null values
@@ -246,6 +247,29 @@ for feature in categorical_features:
 
 Helpful Blog : https://notes88084.blogspot.com/2021/04/exploratory-data-analysis.html
 
+* Finding numerical variables with missing/null values and percentage of missing/null values.
+```python
+
+numerical_with_nan=[feature for feature in df.columns if df[feature].isnull().sum()>1 and df[feature].dtypes!='O']
+
+print(numerical_with_nan,"\n")
+
+for feature in numerical_with_nan:
+    print("{}: {}% missing value".format(feature,np.around(df[feature].isnull().mean(),4)))
+```
+
+* Finding categorical variables with missing/null values and percentage of missing/null values.
+```python
+
+categorical_with_nan=[feature for feature in df.columns if df[feature].isnull().sum()>1 and df[feature].dtypes=='O']
+
+print(categorical_with_nan,"\n")
+
+for feature in categorical_with_nan:
+    print("{}: {}% missing value".format(feature,np.around(df[feature].isnull().mean(),4)))
+```
+
+
 #### Common ways to deal with missing values :
 * Deletion of rows/columns with missing values
 * Replace missing values with Mean/Median/Mode of respective feature.
@@ -256,9 +280,7 @@ Helpful Blog : https://notes88084.blogspot.com/2021/04/exploratory-data-analysis
 
 
 ## Handle outliers in numerical features
-
 Helpful Blog : https://notes88084.blogspot.com/2021/04/exploratory-data-analysis.html
-
 #### Outliers can be of 2 types :
 >* Artificial : outliers created unintentionally due to error during data collection.
 >* Natural : outlier which is not artificial.
@@ -272,13 +294,29 @@ Helpful Blog : https://notes88084.blogspot.com/2021/04/exploratory-data-analysis
 
 
 
+## Handle Skewed Distribution in continuous features
+
+#### If the distributions are skewed (right or left skewed) we may need to transform them into another format like (Standard Distribution).Some common transformations are mentioned below :
+* Log Transform (mostly used)
+* Box Cox Transform
+* Square Root Transform
 
 
+#### (Applying Logarithmic Transformation to continuous features where target_feature is also continuous)
+```python
+for feature in continuous_features:
+    data=df.copy()
+    if 0 in data[feature].unique():
+        pass
+    else:
+        data[feature]=np.log(data[feature])
+        data["TARGET_FEATURE"]=np.log(data["TARGET_FEATURE"])
+```
+        
+#### NOTE : After transformation plot histograms again to verify the change.
 
 
-
-
-
+## Categorical variables : remove rare labels
 
 
 
