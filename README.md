@@ -230,7 +230,12 @@ for feature in categorical_features:
 ***
 
 
-
+# Feature Engineering
+### In this step we use the insights from previous stage to transform data into more suitable format,below are the things we do here:
+* Handle missing/null values
+* Categorical variables : remove rare labels
+* Handle outliers
+* Feature scaling : standarise the variables to the same range
 
 
 
