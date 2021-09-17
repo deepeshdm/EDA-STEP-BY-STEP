@@ -206,7 +206,13 @@ print('Number of categorical variables: ', len(categorical_features))
 df[categorical_features].head()
 ```
 
-##### NOTE : Categorical variables are usually of 2 type : Nominal & Ordinal.Depending on the problem at hand the encoding used is different.But mostly we use ONE-HOT encoding for nominal variable & Label encoding for ordinal variable
+* Find the Cardinality i.e number of categories in each categorical feature
+```python
+for feature in categorical_features:
+    print('The feature is {} and no. of categories are {}'.format(feature,len(df[feature].unique())))
+```
+
+##### NOTE : Categorical variables are usually of 2 type : Nominal & Ordinal.Depending on the Cardinality we can choose if we need to use one-hot encoding or label-encoding. Mostly we use one hot encoding for nominal variable,label encoding for ordinal variable
 
 
 
