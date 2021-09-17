@@ -245,8 +245,6 @@ for feature in categorical_features:
 
 ## Handle missing values
 
-Helpful Blog : https://notes88084.blogspot.com/2021/04/exploratory-data-analysis.html
-
 * Finding numerical variables with missing/null values and percentage of missing/null values.
 ```python
 
@@ -276,11 +274,12 @@ for feature in categorical_with_nan:
 * Create a prediction model to predict missing values
 * KNN Imputation
 
+> see this blog : https://notes88084.blogspot.com/2021/04/exploratory-data-analysis.html
+
 <img src="/Images/missing_values_graph.png" width="58%">
 
 
 ## Handle outliers in numerical features
-Helpful Blog : https://notes88084.blogspot.com/2021/04/exploratory-data-analysis.html
 #### Outliers can be of 2 types :
 >* Artificial : outliers created unintentionally due to error during data collection.
 >* Natural : outlier which is not artificial.
@@ -291,7 +290,7 @@ Helpful Blog : https://notes88084.blogspot.com/2021/04/exploratory-data-analysis
 * Delete outliers
 * Replacing outliers with Mean/Median/Mode (only if outlier is artificial)
 * Treat Seperately - If there are significant number of outliers, we should treat them separately.One of the approach is to treat both groups as two different datasets and build individual model for both groups and then combine the output.
-
+> see this blog : https://notes88084.blogspot.com/2021/04/exploratory-data-analysis.html
 
 
 ## Handle Skewed Distribution in continuous features
