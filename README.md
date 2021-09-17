@@ -234,7 +234,7 @@ for feature in categorical_features:
 ***
 
 
-# Feature Engineering
+# FEATURE ENGINEERING
 #### In this stage we use the insights from previous stage to transform data into more suitable format,below are the things we do here:
 * Handle missing/null values
 * Categorical variables : remove rare labels
@@ -379,16 +379,28 @@ scaled_data = scaler.transform(df[feature_scale]) # returns numpy array
 #### Many times the data set will contain categorical variables, these variables are typically stored as text values. In order to use those categorical features in a model we have to convert them into numerical format.
 
 There are 2 main types of encoding :
-* Label Encoding or Ordinal Encoding (used on ordinal categorical features)
-* One-Hot Encoding (used on nominal categorical features)
+* Label Encoding or Ordinal Encoding ***(used on ordinal categorical features)***
+* One-Hot Encoding ***(used on nominal categorical features)***
 
 ### Label-Encoding with SkLearn
+```python
+from sklearn import preprocessing
+label_encoder = preprocessing.LabelEncoder()
 
+# perform encoding only on categorical features
+categorical_features=[feature for feature in df.columns if df[feature].dtype=='O']
+
+for feature in categorical_features:
+    # encode categorical feature
+    df[feature] = label_encoder.fit_transform(df[feature])
+
+print(df.head())
+```
 
 
 ### One-Hot Encoding with Pandas
 
-#### NOTE : If you have categorical features with high cardinality i.e large number of categories,AVOID using one-hot encoding as it'll create a sparse input matrix and significantly increase number of features. Also avoid falling into a "DUMMY VARIABLE TRAP"
+#### NOTE : If you have categorical features with high cardinality i.e large number of categories,AVOID using one-hot encoding as it'll create a sparse input matrix and significantly increase number of columns/features. Also avoid falling into a "DUMMY VARIABLE TRAP"
 
 ```python
 # list of categorical features in dataset
@@ -406,7 +418,9 @@ df = df.drop(categorical_features,axis="columns")
 <img src="EDA Examples/dummy_variable_trap.png" width="58%">
 
 
+***
 
+# DIMENSIONALITY REDUCTION
 
 
 
