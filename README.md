@@ -345,13 +345,33 @@ The 2 main types of feature scaling methods :
 * Standardization : features will be rescaled so that they’ll have the properties of a standard normal distribution with mean, μ=0 and standard deviation, σ=1.
 
 <img src="/Images/feature_scaling.png" width="58%">
+> see this blog : https://notes88084.blogspot.com/2021/04/exploratory-data-analysis.html
 
 ### Normalization
+```python
+from sklearn.preprocessing import MinMaxScaler
 
+# choose features on which to perform scaling.
+# Perform scaling only on continuous features which will be used in prediciton.
+feature_scale=[feature for feature in df.columns if feature not in ['Id','Name'] ]
 
+scaler=MinMaxScaler()
+scaler.fit(df[feature_scale])
+scaled_data = scaler.transform(df[feature_scale]) # returns numpy array
+```
 
 ### Standardization
+```python
+from sklearn.preprocessing import StandardScaler
 
+# choose features on which to perform scaling.
+# Perform scaling only on continuous features which will be used in prediciton.
+feature_scale=[feature for feature in df.columns if feature not in ['Id','Name'] ]
+
+scaler = StandardScaler()
+scaler.fit(df[feature_scale])
+scaled_data = scaler.transform(df[feature_scale]) # returns numpy array
+```
 
 
 
