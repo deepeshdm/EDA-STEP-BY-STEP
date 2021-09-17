@@ -192,6 +192,9 @@ for feature in continuous_features:
         plt.show()
 ```
 
+* Finding outliers using Z-Score or Interquartile-Range
+> see this blog : https://notes88084.blogspot.com/2021/04/exploratory-data-analysis.html
+
 ***
 
 ## Analyze Categorical Variables
@@ -252,15 +255,20 @@ Helpful Blog : https://notes88084.blogspot.com/2021/04/exploratory-data-analysis
 <img src="/Images/missing_values_graph.png" width="58%">
 
 
-## Handle Outliers in numerical features
-#### Outliers can be of 2 types :
-#### a) Artificial outlier : outliers created unintentionally due to error during data collection.
-#### b) Natural - outlier which is not artificial.
+## Handle outliers in numerical features
 
-#### NOTE : The case of handling outliers totally depends on the problem at hand.Some models are sensitive to outliers whereas some are not.
+Helpful Blog : https://notes88084.blogspot.com/2021/04/exploratory-data-analysis.html
+
+#### Outliers can be of 2 types :
+>* Artificial : outliers created unintentionally due to error during data collection.
+>* Natural : outlier which is not artificial.
+
 <img src="/Images/outliers_sensitive.png" width="58%">
 
-
+#### Common ways to deal with outliers :
+* Delete outliers
+* Replacing outliers with Mean/Median/Mode (only if outlier is artificial)
+* Treat Seperately - If there are significant number of outliers, we should treat them separately.One of the approach is to treat both groups as two different datasets and build individual model for both groups and then combine the output.
 
 
 
