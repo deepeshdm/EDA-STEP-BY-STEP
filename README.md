@@ -215,9 +215,19 @@ for feature in categorical_features:
 
 ##### NOTE : Categorical variables are usually of 2 type : Nominal & Ordinal.Depending on the Cardinality we can choose if we need to use one-hot encoding or label-encoding. Mostly we use one hot encoding for nominal variable,label encoding for ordinal variable
 
+* Find the relationship between categorical variables and dependent feature
+(Here the target_feature is continuous,eg-price)
+```python
+for feature in categorical_features:
+    data=df.copy()
+    data.groupby(feature)["TARGET_FEATURE"].median().plot.bar()
+    plt.xlabel(feature)
+    plt.ylabel("TARGET_FEATURE")
+    plt.title(feature)
+    plt.show()
+```
 
-
-
+***
 
 
 
