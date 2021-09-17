@@ -120,10 +120,32 @@ df[continuous_features].head()
 ```
 
 * Plot Scatterplots of TARGET_FEATURE against each Continuous Feature
-
+```python
+# Plotting Scatterplots of each continuous feature against TARGET_FEATURE
+for feature in continuous_features:
+    data=df.copy()
+    plt.scatter(df[feature],df["TARGET_FEATURE"])
+    plt.xlabel(feature)
+    plt.ylabel("TARGET_FEATURE")
+    plt.show()
+```
 
 
 * Plot Scatterplots of Continuous Features against each other
+```python
+# NOTE : Dont do this if you have more than 3 variables,since it'll create a very large numbers 
+# of plots and it wont be possible to visualize them all at once. 
+# You can use "df.corr()" to find the correlation among the features
+
+# Plotting Scatterplots of each continuous feature against TARGET_FEATURE
+for feature1 in continuous_features:
+    for feature2 in continuous_features:
+            data=df.copy()
+            plt.scatter(df[feature1],df[feature2])
+            plt.xlabel(feature1)
+            plt.ylabel(feature2)
+            plt.show()
+```
 
 
 ##### NOTE : Plotting Scatterplots of Continuous features against target variable and against each other help is determine the "correlation" among them.This is particularly helpful for Regression problem,where we only want to "keep features that have high-correlation with the target variable and low-correlation among themselves".
