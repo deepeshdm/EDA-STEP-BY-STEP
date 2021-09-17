@@ -403,7 +403,7 @@ df = pd.concat([df,new_encoded_columns],axis="columns")
 # dropping the categorical variables since they are redundant now.
 df = df.drop(categorical_features,axis="columns")
 ```
-<img src="/Images/dummy_variable_trap.png" width="58%">
+<img src="EDA Examples/dummy_variable_trap.png" width="58%">
 
 
 
