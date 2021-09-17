@@ -348,26 +348,26 @@ The 2 main types of feature scaling methods :
 
 > see this blog : https://notes88084.blogspot.com/2021/04/exploratory-data-analysis.html
 
-### Normalization with SkLearn
+#### Normalization with SkLearn
 ```python
 from sklearn.preprocessing import MinMaxScaler
 
 # choose features on which to perform scaling.
 # Perform scaling only on continuous features which will be used in prediciton.
-feature_scale=[feature for feature in df.columns if feature not in ['Id','Name'] ]
+feature_scale=[feature for feature in df.columns if feature not in ['Id','Name'] and df[feature].dtypes!='O']
 
 scaler=MinMaxScaler()
 scaler.fit(df[feature_scale])
 scaled_data = scaler.transform(df[feature_scale]) # returns numpy array
 ```
 
-### Standardization with SkLearn
+#### Standardization with SkLearn
 ```python
 from sklearn.preprocessing import StandardScaler
 
 # choose features on which to perform scaling.
 # Perform scaling only on continuous features which will be used in prediciton.
-feature_scale=[feature for feature in df.columns if feature not in ['Id','Name'] ]
+feature_scale=[feature for feature in df.columns if feature not in ['Id','Name'] and df[feature].dtypes!='O']
 
 scaler = StandardScaler()
 scaler.fit(df[feature_scale])
@@ -375,12 +375,18 @@ scaled_data = scaler.transform(df[feature_scale]) # returns numpy array
 ```
 
 
-## Encode categorical features
+## Encoding categorical features
+#### Many times the data set will contain categorical variables, these variables are typically stored as text values. In order to use those categorical features in a model we have to convert them into numerical format.
+
+There are 2 main types of encoding :
+* Label Encoding or Ordinal Encoding (used on ordinal categorical features)
+* One-Hot Encoding (used on nominal categorical features)
+
+#### Label-Encoding with SkLearn
 
 
 
-
-
+#### One-Hot Encoding with Pandas
 
 
 
