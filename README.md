@@ -334,21 +334,23 @@ for feature in categorical_features:
 ```
 
 
+## Feature Scaling
+#### Here we bring the values of all features to a common scale so that difference in magnitude of feature values dont affect the accuracy of the model.When the values in some features/columns are very high as compared to rest of the features,then these features tend to have high impact in model prediction, even if they are far less crucial in determining the output hence feature-scaling must be applied here.
+
+#### Note : Not all models need feature scaling. Tree based algorithms are fairly insensitive to feature scaling.Algorithms that compute the distance between variables are highly biased towards larger values & hence need feature scaling (eg:K-means,SVM)
+
+The 2 main types of feature scaling methods :
+
+* Normalization : features will be rescaled to range of [0,1]
+* Standardization : features will be rescaled so that they’ll have the properties of a standard normal distribution with mean, μ=0 and standard deviation, σ=1.
+
+<img src="/Images/feature_scaling.png" width="58%">
+
+### Normalization
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
+### Standardization
 
 
 
