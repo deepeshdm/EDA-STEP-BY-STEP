@@ -14,7 +14,7 @@
 #### B) Categorical (of 2 types : Nominal,Ordinal)
 ***
 
-# Data Analysis
+# DATA ANALYSIS
 ### In this step we take a high level look at our dataset and gain insights on topics mentioned below:
 * Shape of Dataset (number of rows and columns)
 * Number of Numerical & Categorcial Features
@@ -26,6 +26,13 @@
 
 #### NOTE : In Data Analysis our task is only to find insights and not to make any changes (like removing rows/columns or imputing missing values).After this stage we take these insights and make changes to the dataset in the feature engineering stage.Though this is not a hard rule and you can take any required steps as per your task.
 
+### Import Python Packages
+```python
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+```
 
 ## Data Analysis Step-By-Step ("df" is dataset dataframe)
 
@@ -36,7 +43,27 @@ df.describe()   #describe statistics of features (mean,median,mode,count etc)
 df.corr()     #computes pairwise pearson's correlation among features
 ```
 
+* Finding variables with missing/null values and percentage of missing/null values.
+```python
+features_with_na = [feature for feature in df.columns if df[feature].isnull().sum() > 1]
 
+for feature in features_with_na :
+    print(feature,"  ",np.round(df[feature].isnull().mean(),4),"% missing values")
+```
+##### NOTE : In order to decide if we should remove or keep the features with missing/null values we need to find their relationship with the dependent variable and see if they are of any significance.
+
+* Plot Bar-Graphs of TARGET_FEATURE against features with missing/null values
+```python
+for feature in features_with_na:
+    data = df.copy()
+    
+    # let's make a variable that indicates 1 if the observation was missing or zero otherwise
+    data[feature] = np.where(data[feature].isnull(), 1, 0)
+    
+    data.groupby(feature)["TARGET_FEATURE"].median().plot.bar()
+    plt.title(feature)
+    plt.show()
+```
 
 
 
