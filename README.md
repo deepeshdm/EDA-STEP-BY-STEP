@@ -36,7 +36,8 @@ import seaborn as sns
 
 ***
 
-## Data Analysis Step-By-Step ("df" is dataset dataframe)
+## Data Analysis Step-By-Step 
+### ("df" is dataset dataframe,Target_Feature is continuous eg:price)
 
 * Describe the Dataset using comman pandas functions
 ```python
