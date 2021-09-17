@@ -171,14 +171,29 @@ for feature in continuous_features:
 
 ##### NOTE : It is very important to know the distribution of values in continuous features,in case the distribution is "Skewed" (Right Skewed or Left Skewed) we need to transform it into another format like Standard-Distribution during Feature-Engneering.This is a MUST step in a Regression Problem.
 
+### Outliers in Continuous Variables
 
+* Finding outliers distribution in each feature by creating their box-plot
+```python
 
+# NOTE : This works only for continuous variables and not for categorical
 
+for feature in continuous_features:
+    data=df.copy()
+    if 0 in data[feature].unique():
+        pass
+    else:
+        # applying log Transformation
+        data[feature]=np.log(data[feature])
+        data.boxplot(column=feature)
+        plt.ylabel(feature)
+        plt.title(feature)
+        plt.show()
+```
 
 ***
 
-
-
+## Analyze Categorical Variables
 
 
 
