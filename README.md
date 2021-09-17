@@ -24,8 +24,16 @@
 * Detecting Features with most Outliers
 * Finding relationship between Independent & Dependent variables
 
+#### NOTE : In Data Analysis our task is only to find insights and not to make any changes (like removing rows/columns or imputing missing values).After this stage we take these insights and make changes to the dataset in the feature engineering stage.Though this is not a hard rule and you can take any required steps as per your task.
+
+
+## Data Analysis Step-By-Step ("df" is dataset dataframe)
+
+* Describe the Dataset using comman pandas functions
 ```python
-print("Write your code here")
+df.info()     #prints info about features(dtype,non-null values,memory usage etc)
+df.describe()   #describe statistics of features (mean,median,mode,count etc)
+df.corr()     #computes pairwise pearson's correlation among features
 ```
 
 
