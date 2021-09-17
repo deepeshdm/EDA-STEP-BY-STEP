@@ -153,6 +153,28 @@ for feature1 in continuous_features:
 ##### NOTE : Plotting Scatterplots of Continuous features against target variable and against each other help is determine the "correlation" among them.This is particularly helpful for Regression problem,where we only want to "keep features that have high-correlation with the target variable and low-correlation among themselves".
 
 
+* Find the Distribution of values in each Continuous feature (create histograms)
+```python
+## NOTE : If the distributions are skewed we may need to transform them into another format like (Standard Distribution).
+## Such data can be handled by following ways :
+# 1] Log Transform (mostly used)
+# 2] Box Cox Transform
+# 3] Square Root Transform
+
+for feature in continuous_features:
+    data=df.copy()
+    data[feature].hist(bins=25)
+    plt.xlabel(feature)
+    plt.ylabel("Count")
+    plt.show()
+```
+
+##### NOTE : It is very important to know the distribution of values in continuous features,in case the distribution is "Skewed" (Right Skewed or Left Skewed) we need to transform it into another format like Standard-Distribution during Feature-Engneering.This is a MUST step in a Regression Problem.
+
+
+
+
+
 ***
 
 
