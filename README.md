@@ -231,18 +231,34 @@ for feature in categorical_features:
 
 
 # Feature Engineering
-#### In this step we use the insights from previous stage to transform data into more suitable format,below are the things we do here:
+#### In this stage we use the insights from previous stage to transform data into more suitable format,below are the things we do here:
 * Handle missing/null values
 * Categorical variables : remove rare labels
 * Handle outliers in numerical features
+* Handle Skewed Distribution in continuous features
 * Feature scaling : standarise the variables to the same range
 
 
 ## Handle missing values
 
+Helpful Blog : https://notes88084.blogspot.com/2021/04/exploratory-data-analysis.html
+
+#### Common ways to deal with missing values :
+* Deletion of rows/columns with missing values
+* Replace missing values with Mean/Median/Mode of respective feature.
+* Create a prediction model to predict missing values
+* KNN Imputation
+
+<img src="/Images/missing_values_graph.png" width="58%">
 
 
+## Handle Outliers in numerical features
+#### Outliers can be of 2 types :
+#### a) Artificial outlier : outliers created unintentionally due to error during data collection.
+#### b) Natural - outlier which is not artificial.
 
+#### NOTE : The case of handling outliers totally depends on the problem at hand.Some models are sensitive to outliers whereas some are not.
+<img src="/Images/outliers_sensitive.png" width="58%">
 
 
 
