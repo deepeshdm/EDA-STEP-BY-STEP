@@ -424,12 +424,12 @@ df = df.drop(categorical_features,axis="columns")
 * Feature Selection :  we try to select the most optimal features for the model from a given set of existing large number of features.
 * Feature Extraction : we reduce the number of features in a dataset by creating new features from the existing ones.
 
-#### feature selection includes 3 types of methods :
+**feature selection includes 3 types of methods :**
 * Filter methods
 * Wrapper methods
 * Embedded methods
 
-#### some common feature extraction methods : 
+**some common feature extraction methods :** 
 1. Principal Component Analysis (PCA)
 2. Linear Discriminant Analysis (LDA)
 3. t-SNE (Non-Linear)
@@ -441,7 +441,7 @@ df = df.drop(categorical_features,axis="columns")
 
 ## Filter Methods (feature selection)
 #### In Filter methods the features are selected on the basis of their scores in various statistical tests for their correlation with the target variable.
-#### some common filter methods : 
+**some common filter methods :** 
 1. Variance Threshold
 2. Pearson's Correlation
 3. Chi Square Test
@@ -458,7 +458,7 @@ df = df.drop(categorical_features,axis="columns")
 
 #### Caution : wrapper methods are usually computationally very expensive.
 
-#### some common wrapper methods : 
+**some common wrapper methods :** 
 1. Forward selection
 2. Backward elimination
 3. Recursive feature elimination
@@ -476,7 +476,7 @@ df = df.drop(categorical_features,axis="columns")
 ## Embedded Methods (feature selection)
 ### Embedded methods combine the qualities’ of filter and wrapper methods. It’s implemented by algorithms that have their own built-in feature selection methods.The most typical embedded technique is decision tree algorithm. Decision tree algorithms select a feature in each recursive step of the tree growth process and divide the sample set into smaller subsets.
 
-#### some commonly Implemented embedded methods : 
+**some commonly Implemented embedded methods :**
 1. Decision Tree
 2. Lasso Regression (L1)
 3. Ridge Regression (L2)
