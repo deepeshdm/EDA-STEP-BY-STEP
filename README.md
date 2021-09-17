@@ -5,8 +5,11 @@
 #### 2] Feature Engineering
 #### 3] Dimensionality Reduction (Feature selection,Feature extraction)
 
-***
 #### NOTE : This is a general process to perform EDA,depending on your dataset and task at hand,you may use all or only a few of the steps defined below.
+
+***
+### Useful Links : 
+#### Top 50 matplotlib charts : https://www.machinelearningplus.com/plots/top-50-matplotlib-visualizations-the-master-plots-python/
 ***
 
 #### Exploratory Data Analysis is performed only on structured datasets.These structured datasets have 2 types of features :
