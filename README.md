@@ -345,6 +345,7 @@ The 2 main types of feature scaling methods :
 * Standardization : features will be rescaled so that they’ll have the properties of a standard normal distribution with mean, μ=0 and standard deviation, σ=1.
 
 <img src="/Images/feature_scaling.png" width="58%">
+
 > see this blog : https://notes88084.blogspot.com/2021/04/exploratory-data-analysis.html
 
 ### Normalization with SkLearn
