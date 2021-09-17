@@ -238,6 +238,7 @@ for feature in categorical_features:
 #### In this stage we use the insights from previous stage to transform data into more suitable format,below are the things we do here:
 * Handle missing/null values
 * Categorical variables : remove rare labels
+* Encode categorical features & convert into numerical
 * Handle outliers in numerical features
 * Handle Skewed Distribution in continuous features
 * Feature scaling : standarise the variables to the same range
@@ -316,10 +317,21 @@ for feature in continuous_features:
 
 
 ## Categorical variables : remove rare labels
+##### If you have a categorical variable with large number of categories,then it is possible that not all of those categories are contributing so much in prediction.We need to remove these categories.By remove we mean we'll give these categories a new label,this will group these different categories into a single category.
 
+> see this video : https://youtu.be/AtXNo2c-TYk
+```python
+# list of categorical features
+categorical_features=[feature for feature in df.columns if df[feature].dtype=='O']
 
+# For each categorical feature replace all the catergories with "Rare_Value" which 
+# are present in less than 1% on entire dataset samples.
 
-
+for feature in categorical_features:
+    temp=df.groupby(feature)["TARGET_FEATURE"].count()/len(df)
+    temp_df=temp[temp>0.01].index # 0.01 means 1%
+    df[feature]=np.where(df[feature].isin(temp_df),df[feature],'Rare_var')
+```
 
 
 
