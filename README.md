@@ -424,12 +424,12 @@ df = df.drop(categorical_features,axis="columns")
 * Feature Selection :  we try to select the most optimal features for the model from a given set of existing large number of features.
 * Feature Extraction : we reduce the number of features in a dataset by creating new features from the existing ones.
 
-**feature selection includes 3 types of methods :**
+**Feature Selection includes 3 types of methods :**
 * Filter methods
 * Wrapper methods
 * Embedded methods
 
-**some common feature extraction methods :** 
+**Feature Extraction methods :** 
 1. Principal Component Analysis (PCA)
 2. Linear Discriminant Analysis (LDA)
 3. t-SNE (Non-Linear)
@@ -476,7 +476,7 @@ df = df.drop(categorical_features,axis="columns")
 ## Embedded Methods (feature selection)
 #### Embedded methods combine the qualities’ of filter and wrapper methods. It’s implemented by algorithms that have their own built-in feature selection methods.The most typical embedded technique is decision tree algorithm. Decision tree algorithms select a feature in each recursive step of the tree growth process and divide the sample set into smaller subsets.
 
-**some commonly Implemented embedded methods :**
+**some common embedded methods :**
 1. Decision Tree
 2. Lasso Regression (L1)
 3. Ridge Regression (L2)
