@@ -382,13 +382,28 @@ There are 2 main types of encoding :
 * Label Encoding or Ordinal Encoding (used on ordinal categorical features)
 * One-Hot Encoding (used on nominal categorical features)
 
-#### Label-Encoding with SkLearn
+### Label-Encoding with SkLearn
 
 
 
-#### One-Hot Encoding with Pandas
+### One-Hot Encoding with Pandas
 
+#### NOTE : If you have categorical features with high cardinality i.e large number of categories,AVOID using one-hot encoding as it'll create a sparse input matrix and significantly increase number of features. Also avoid falling into a "DUMMY VARIABLE TRAP"
 
+```python
+# list of categorical features in dataset
+categorical_features=[feature for feature in df.columns if df[feature].dtype=='O']
+
+# encode categorical features
+new_encoded_columns = pd.get_dummies(df[categorical_features])
+
+# Concatinating with original dataframe
+df = pd.concat([df,new_encoded_columns],axis="columns")
+
+# dropping the categorical variables since they are redundant now.
+df = df.drop(categorical_features,axis="columns")
+```
+<img src="/Images/dummy_variable_trap.png" width="58%">
 
 
 
