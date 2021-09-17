@@ -34,6 +34,8 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 ```
 
+***
+
 ## Data Analysis Step-By-Step ("df" is dataset dataframe)
 
 * Describe the Dataset using comman pandas functions
@@ -64,6 +66,8 @@ for feature in features_with_na:
     plt.title(feature)
     plt.show()
 ```
+
+***
 
 ## Analyze Numerical Variables
 
@@ -115,9 +119,17 @@ print('Number of Continuous variables: ', len(continuous_features))
 df[continuous_features].head()
 ```
 
+* Plot Scatterplots of TARGET_FEATURE against each Continuous Feature
 
 
 
+* Plot Scatterplots of Continuous Features against each other
+
+
+##### NOTE : Plotting Scatterplots of Continuous features against target variable and against each other help is determine the "correlation" among them.This is particularly helpful for Regression problem,where we only want to "keep features that have high-correlation with the target variable and low-correlation among themselves".
+
+
+***
 
 
 
