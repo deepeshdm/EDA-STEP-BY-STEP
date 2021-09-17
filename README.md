@@ -65,17 +65,55 @@ for feature in features_with_na:
     plt.show()
 ```
 
+## Analyze Numerical Variables
 
+* Find number of numerical features in dataset
+```python
+# list of all numerical variables in dataset
+numerical_features = [feature for feature in df.columns if df[feature].dtypes != 'O']
 
+print('Number of numerical variables: ', len(numerical_features))
 
+# visualise the numerical variables
+df[numerical_features].head()
+```
 
+##### NOTE : Numerical variables are usually of 2 type : Continous & Discrete Variables,Analyze them seperately
 
+### Analyze Discrete Variables
+* Find number of Discrete features in dataset
+```python
+# list of all discrete variables in dataset
+discrete_features=[feature for feature in numerical_features if len(df[feature].unique())<25]
 
+print('Number of Discrete variables: ', len(discrete_features))
 
+# visualise the numerical variables
+df[discrete_features].head()
+```
 
+* Find the realtionship between them and dependent variable by plotting graphs
+```python
+for feature in discrete_features:
+    data=df.copy()
+    data.groupby(feature)["TARGET_FEATURE"].median().plot.bar()
+    plt.xlabel(feature)
+    plt.ylabel("TARGET_FEATURE")
+    plt.title(feature)
+    plt.show()
+```
 
+### Analyze Continuous Variables
+* Find number of Continuous features in dataset
+```python
+# list of all continuous variables in dataset
+continuous_features=[feature for feature in numerical_features if feature not in discrete_features]
 
+print('Number of Continuous variables: ', len(continuous_features))
 
+# visualise the numerical variables
+df[continuous_features].head()
+```
 
 
 
