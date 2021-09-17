@@ -347,7 +347,7 @@ The 2 main types of feature scaling methods :
 <img src="/Images/feature_scaling.png" width="58%">
 > see this blog : https://notes88084.blogspot.com/2021/04/exploratory-data-analysis.html
 
-### Normalization
+### Normalization with SkLearn
 ```python
 from sklearn.preprocessing import MinMaxScaler
 
@@ -360,7 +360,7 @@ scaler.fit(df[feature_scale])
 scaled_data = scaler.transform(df[feature_scale]) # returns numpy array
 ```
 
-### Standardization
+### Standardization with SkLearn
 ```python
 from sklearn.preprocessing import StandardScaler
 
@@ -374,7 +374,7 @@ scaled_data = scaler.transform(df[feature_scale]) # returns numpy array
 ```
 
 
-
+## Encode categorical features
 
 
 
