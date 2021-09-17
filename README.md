@@ -238,7 +238,7 @@ for feature in categorical_features:
 #### In this stage we use the insights from previous stage to transform data into more suitable format,below are the things we do here:
 * Handle missing/null values
 * Categorical variables : remove rare labels
-* Encode categorical features & convert into numerical
+* Encode categorical features (label & one-hot encoding)
 * Handle outliers in numerical features
 * Handle Skewed Distribution in continuous features
 * Feature scaling : standarise the variables to the same range
