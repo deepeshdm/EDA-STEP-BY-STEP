@@ -419,8 +419,135 @@ df = df.drop(categorical_features,axis="columns")
 
 
 ***
-
 # DIMENSIONALITY REDUCTION
+#### Dimensionality reduction consist of 2 main parts :
+* Feature Selection :  we try to select the most optimal features for the model from a given set of existing large number of features.
+* Feature Extraction : we reduce the number of features in a dataset by creating new features from the existing ones.
+
+#### feature selection includes 3 types of methods :
+* Filter methods
+* Wrapper methods
+* Embedded methods
+
+#### some common feature extraction methods : 
+1. Principal Component Analysis (PCA)
+2. Linear Discriminant Analysis (LDA)
+3. t-SNE (Non-Linear)
+4. Auto-Encoder
+
+> see this blog : https://notes88084.blogspot.com/2021/04/dimensionality-reduction.html
+
+***
+
+## Filter Methods (feature selection)
+#### In Filter methods the features are selected on the basis of their scores in various statistical tests for their correlation with the target variable.
+#### some common filter methods : 
+1. Variance Threshold
+2. Pearson's Correlation
+3. Chi Square Test
+4. Information gain
+
+
+***
+
+
+
+
+## Wrapper Methods (feature selection)
+#### In wrapper methods, we try to use a subset of features and train a model using them. Based on the inferences that we draw from the previous model, we decide to add or remove features from your subset.
+
+#### Caution : wrapper methods are usually computationally very expensive.
+
+#### some common wrapper methods : 
+1. Forward selection
+2. Backward elimination
+3. Recursive feature elimination
+4. Genetic Algorithms
+
+#### Note: One of the most advanced algorithms for feature selection are "genetic algorithms".These are stochastic methods for function optimization based on the mechanics of natural genetics and biological evolution.
+
+
+***
+
+
+
+
+
+## Embedded Methods (feature selection)
+### Embedded methods combine the qualities’ of filter and wrapper methods. It’s implemented by algorithms that have their own built-in feature selection methods.The most typical embedded technique is decision tree algorithm. Decision tree algorithms select a feature in each recursive step of the tree growth process and divide the sample set into smaller subsets.
+
+#### some commonly Implemented embedded methods : 
+1. Decision Tree
+2. Lasso Regression (L1)
+3. Ridge Regression (L2)
+
+
+***
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
