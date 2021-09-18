@@ -658,12 +658,20 @@ df = df[best_features]
 
 
 ## Embedded Methods (feature selection)
-#### Embedded methods combine the qualities’ of filter and wrapper methods. It’s implemented by algorithms that have their own built-in feature selection methods.The most typical embedded technique is decision tree algorithm. Decision tree algorithms select a feature in each recursive step of the tree growth process and divide the sample set into smaller subsets.
+#### Embedded methods combine the qualities of filter and wrapper methods. It’s implemented by algorithms that have their own built-in feature selection methods.The most typical embedded technique is decision tree algorithm. Decision tree algorithms select a feature in each recursive step of the tree growth process and divide the sample set into smaller subsets.
+#### Embedded methods complete the feature selection process within the construction of the machine learning algorithm itself. In other words, they perform feature selection during the model training, which is why we call them embedded methods.A learning algorithm takes advantage of its own variable selection process and performs feature selection and classification/regression at the same time.
 
-**some common embedded methods :**
-1. Decision Tree
+**Some Common Embedded Methods :**
+1. Tree Based models (Decision Tree,Random Forest,XGBoost etc)
 2. Lasso Regression (L1)
 3. Ridge Regression (L2)
+
+> Info with Code : https://heartbeat.fritz.ai/hands-on-with-feature-selection-techniques-embedded-methods-84747e814dab
+
+### Embedded methods work as follows :
+1. First, these methods train a machine learning model.
+2. They then derive feature importance from this model, which is a measure of how much is feature important when making a prediction.
+3. Finally, they remove non-important features using the derived feature importance.
 
 
 ***
