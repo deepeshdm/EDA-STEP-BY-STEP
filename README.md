@@ -493,11 +493,51 @@ df.head(10)
 ```
 
 ## Pearson's Correlation (filter method)
-#### If two variables are highly correlated among themselves,we can make an accurate prediction on the target variable with just one variable.So removing one of the variable can help to reduce the dimensionality.In this method we use 'Pearson's correlation' as a threshold metric to remove correlated features.In short we want the features which are correlated with target feature but avoid having features which are correlated among themselves.
+#### If two or more variables are highly correlated among themselves,we can make an accurate prediction on the target variable with just one variable.So removing other variables can help to reduce the dimensionality.In this method we use 'Pearson's correlation' as a threshold metric to remove correlated features.In short we want the features which are correlated with target feature but avoid having features which are correlated among themselves.
 **Pearson's Correlation Coefficient ranges between -1 (negative relation) and +1 (positive relation).**
 
 #### NOTE : This only works with numeric features and it will raise an error if there are categorical features present in the dataframe.It is preffered to use mostly in Regression problems.
 
+```python
+import pandas as pd
+
+x = pd.read_csv("train.csv")
+
+"""
+It takes a dataframe & threshold value for correlation coefficient 
+and returns list of columns to remove.If 2 or more features have 
+correlation coefficient above the threshold then only one of them is kept.
+
+It will remove the first feature that is correlated with 
+any other feature.
+"""
+
+
+def get_correlated_features(dataset, threshold):
+    # list of all numerical features in dataset
+    numerical_features = [feature for feature in dataset.columns if dataset[feature].dtype != 'O']
+
+    df_numerical = dataset[numerical_features]
+
+    # names of correlated columns to remove
+    col_corr = set()
+    corr_matrix = df_numerical.corr()
+    for i in range(len(corr_matrix.columns)):
+        for j in range(i):
+            # remove abs() to also consider negative correlation
+            if abs(corr_matrix.iloc[i, j]) > threshold:
+                colname = corr_matrix.columns[i]
+                col_corr.add(colname)
+    return list(col_corr)
+
+
+correlated_features = get_correlated_features(x, 0.8)
+print("Columns to Remove : ",correlated_features)
+
+# remove features from original dataset
+x = x.drop(correlated_features, axis="columns")
+
+```
 
 ***
 
