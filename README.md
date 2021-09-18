@@ -540,7 +540,6 @@ print("Columns to Remove : ",correlated_features)
 
 # remove features from original dataset
 x = x.drop(correlated_features, axis="columns")
-
 ```
 
 ***
@@ -553,7 +552,7 @@ x = x.drop(correlated_features, axis="columns")
 ## Wrapper Methods (feature selection)
 #### In wrapper methods, we try to use a subset of features and train a model using them. Based on the inferences that we draw from the previous model, we decide to add or remove features from your subset.
 
-#### Caution : wrapper methods are usually computationally very expensive.
+### Caution : wrapper methods are computationally very expensive.
 
 **some common wrapper methods :** 
 1. Forward selection
@@ -562,6 +561,18 @@ x = x.drop(correlated_features, axis="columns")
 4. Genetic Algorithms
 
 #### Note: One of the most advanced algorithms for feature selection are "genetic algorithms".These are stochastic methods for function optimization based on the mechanics of natural genetics and biological evolution.
+
+
+## Forward Selection 
+> Info with Code : 
+> https://www.analyticsvidhya.com/blog/2021/04/forward-feature-selection-and-its-implementation/
+
+## Backward Elimination
+> Info with Code : 
+> https://www.analyticsvidhya.com/blog/2021/04/backward-feature-elimination-and-its-implementation/?utm_source=blog&utm_medium=Forward_Feature_Elimination
+
+
+## Recursive Feature Elimination
 
 
 ***
