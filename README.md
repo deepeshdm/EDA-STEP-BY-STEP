@@ -510,6 +510,10 @@ correlation coefficient above the threshold then only one of them is kept.
 
 It will remove the first feature that is correlated with 
 any other feature.
+
+NOTE : The below code does'nt consider features with negative correlation,to also include removal of 
+features with high negative correlation,remove the "abs()" in correlation() function below.
+
 """
 
 
