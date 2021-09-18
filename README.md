@@ -580,10 +580,76 @@ x = x.drop(correlated_features, axis="columns")
 #### There are 2 types of RFE : 1] RFE without Cross Validation 2] RFE with Cross Validation
 
 ### RFE (without Cross Validation)
+Here we explicitly mention the number of features to be selected.
+```python
+from sklearn.feature_selection import RFE
+
+"""
+BEFORE USING RFE : 
+1] Handle Missing Values
+2] Encode Categorical Features
+3] Scale all required features
+"""
+
+# Returns a list of selected features
+def get_optimal_features(x, y, model, num_features):
+    # Takes model & the number of features to select as parameter.
+    rfe = RFE(estimator=model, n_features_to_select=num_features, verbose=1)
+
+    rfe.fit(x, y)
+
+    # Gets a list containing boolean values -
+    # True for best selected features/ False for features that are eliminated.
+    boolean_list = rfe.get_support()
+
+    column_names = x.columns
+    # list of selected features
+    optimal_features = column_names[boolean_list]
+
+    print("Selected Features : ", optimal_features)
+    return optimal_features
+
+best_features = get_optimal_features(x, y, model, num_features)
+# dropping not selected features in original dataset
+df = df[best_features]
+```
 
 
+### RFE (with Cross Validation)
+#### Here we dont mention the number of features to be selected explicitly,instead the algorithm selects the best number of features for us using cross-validation.This requires more computation than regular RFE.
 
+```python
+from sklearn.feature_selection import RFECV
 
+"""
+BEFORE USING RFECV : 
+1] Handle Missing Values
+2] Encode Categorical Features
+3] Scale all required features
+"""
+
+# Returns a list of selected features
+def get_optimal_features(x, y, model):
+    # Takes model & the number of features to select as parameter.
+    rfecv = RFECV(estimator=model, verbose=1)
+
+    rfecv.fit(x, y)
+
+    # Gets a list containing boolean values -
+    # True for best selected features/ False for features that are eliminated.
+    boolean_list = rfecv.get_support()
+
+    column_names = x.columns
+    # list of selected features
+    optimal_features = column_names[boolean_list]
+
+    print("Selected Features : ", optimal_features)
+    return optimal_features
+
+best_features = get_optimal_features(x, y, model)
+# dropping not selected features in original dataset
+df = df[best_features]
+```
 
 ***
 
