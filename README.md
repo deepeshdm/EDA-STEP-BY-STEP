@@ -458,7 +458,7 @@ df = df.drop(categorical_features,axis="columns")
 ```python
 import pandas as pd
 from sklearn.feature_selection import VarianceThreshold
-THRESHOLD = 3
+THRESHOLD = 0.5 #default value is 0
 df = pd.read_csv("train.csv")
 
 # Takes a dataframe & threshold,returns a dataframe with low-variance columns removed.
