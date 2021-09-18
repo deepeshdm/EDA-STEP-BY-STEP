@@ -673,6 +673,34 @@ df = df[best_features]
 2. They then derive feature importance from this model, which is a measure of how much is feature important when making a prediction.
 3. Finally, they remove non-important features using the derived feature importance.
 
+## Feature Selection with Regularization model
+```python
+import pandas as pd
+from sklearn.linear_model import Lasso
+from sklearn.feature_selection import SelectFromModel
+
+df = pd.read_csv(r"santander_dataset.csv", nrows=1000)
+x = df.drop("TARGET", axis="columns")
+y = df["TARGET"]
+model = Lasso(alpha=0.005, random_state=0)
+
+# returns a list of selected features
+def get_important_features(x, y, model):
+    selection = SelectFromModel(model)
+    selection.fit(x, y)
+
+    # list of selected features
+    selected_features = x.columns[(selection.get_support())]
+
+    print("No. of Features Selected : ", len(selected_features))
+    print("Features Selected : ", selected_features)
+    return selected_features
+
+best_features = get_important_features(x,y,model)
+# dropping un-selected features from original dataset
+x = x[best_features]
+```
+
 
 ***
 
