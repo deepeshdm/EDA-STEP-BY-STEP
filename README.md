@@ -701,6 +701,44 @@ best_features = get_important_features(x,y,model)
 x = x[best_features]
 ```
 
+## Feature Selection with Tree-Based Model
+
+#### NOTE : For classification, the measure of impurity is either the Gini impurity or the information gain/entropy.For regression the measure of impurity is variance.
+#### when training a tree, it is possible to compute how much each feature decreases the impurity. The more a feature decreases the impurity, the more important the feature is. In random forests, the impurity decrease from each feature can be averaged across trees to determine the final importance of the variable.
+
+> To give a better intuition, features that are selected at the top of the trees are in general more important than features that are selected at the end nodes of the trees, as generally the top splits lead to bigger information gains.
+
+> Info with Code : https://towardsdatascience.com/feature-selection-using-random-forest-26d7b747597f
+
+```python
+# NOTE : You can use any other tree-based algorithm (like XGBoost, CatBoost, and many more)
+
+import pandas as pd
+from sklearn.feature_selection import SelectFromModel
+from sklearn.ensemble import RandomForestClassifier
+
+# It has 76k rows , 371 columns , hence taking only 10k rows.
+df = pd.read_csv(r"santander_dataset.csv", nrows=1000)
+x = df.drop("TARGET", axis="columns")
+y = df["TARGET"]
+model = RandomForestClassifier(n_estimators=100)
+
+# returns a list of selected features
+def get_important_features(x, y, model):
+    selection = SelectFromModel(model)
+    selection.fit(x, y)
+
+    # list of selected features
+    selected_features = x.columns[(selection.get_support())]
+
+    print("No. of Features Selected : ", len(selected_features))
+    print("Features Selected : ", selected_features)
+    return selected_features
+
+best_features = get_important_features(x, y, model)
+# dropping un-selected features from original dataset
+x = x[best_features]
+```
 
 ***
 
