@@ -494,9 +494,7 @@ df.head(10)
 
 ## Pearson's Correlation (filter method)
 #### If two variables are highly correlated among themselves,we can make an accurate prediction on the target variable with just one variable.So removing one of the variable can help to reduce the dimensionality.In this method we use 'Pearson's correlation' as a threshold metric to remove correlated features.
-**Pearson's Correlation range between -1 (strong negative relationship) and +1 (strong positive relationship),below is the formula.**
-
-<Img src="/Images/correlation_coefficient_formula.png" width="58%">
+**Pearson's Correlation Coefficient ranges between -1 (negative relation) and +1 (positive relation).**
 
 #### NOTE : This estimator only works with numeric data and it will raise an error if there are categorical features present in the dataframe.
 
