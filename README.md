@@ -451,7 +451,14 @@ df = df.drop(categorical_features,axis="columns")
 4. Information gain
 
 
+### Variance Threshold (filter method)
+#### This technique is a quick and lightweight way of eliminating features with very low variance (features with not much useful information).It removes all features whose variance doesn't meet some threshold.By default, it removes all zero-variance features(features that have the same or constant value in all samples).
+#### NOTE : This estimator only works with numeric data and it will raise an error if there are categorical features present in the dataframe.
+
+
 ***
+
+
 
 
 
