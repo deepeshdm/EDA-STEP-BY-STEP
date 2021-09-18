@@ -452,9 +452,45 @@ df = df.drop(categorical_features,axis="columns")
 
 
 ### Variance Threshold (filter method)
-#### This technique is a quick and lightweight way of eliminating features with very low variance (features with not much useful information).It removes all features whose variance doesn't meet some threshold.By default, it removes all zero-variance features(features that have the same or constant value in all samples).
+#### This technique is a quick and lightweight way of eliminating features with very low variance (features with not much useful information).It removes all features whose variance doesn't meet some threshold.By default, it removes all zero-variance features(features that have the same or constant value in all samples).This feature selection algorithm looks only at the features (X), not the desired outputs (y), and can thus be used for unsupervised learning.
 #### NOTE : This estimator only works with numeric data and it will raise an error if there are categorical features present in the dataframe.
 
+```python
+import pandas as pd
+from sklearn.feature_selection import VarianceThreshold
+THRESHOLD = 3
+df = pd.read_csv("train.csv")
+
+# Takes a dataframe & threshold,returns a dataframe with low-variance columns removed.
+def remove_features(df, threshold):
+    # list of all numerical features in dataset
+    numerical_features = [feature for feature in df.columns if df[feature].dtype != 'O']
+
+    # dataframe of numerical features
+    df_numerical = df[numerical_features]
+
+    vt = VarianceThreshold(threshold)
+    vt.fit(df_numerical)
+
+    # list of selected columns
+    selected_columns = df_numerical.columns[vt.get_support()]
+
+    # list of columns not selected
+    columns_to_remove = []
+    for column in df_numerical.columns:
+        if column not in selected_columns:
+            columns_to_remove.append(column)
+
+    print("Number of Columns Removed : ", len(columns_to_remove))
+    print("List of Removed Columns : ", columns_to_remove)
+
+    # removing columns from original dataset
+    df = df.drop(columns_to_remove, axis="columns")
+    return df
+   
+df = remove_features(df,5)
+df.head(10)
+```
 
 ***
 
