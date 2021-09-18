@@ -493,10 +493,10 @@ df.head(10)
 ```
 
 ## Pearson's Correlation (filter method)
-#### If two variables are highly correlated among themselves,we can make an accurate prediction on the target variable with just one variable.So removing one of the variable can help to reduce the dimensionality.In this method we use 'Pearson's correlation' as a threshold metric to remove correlated features.
+#### If two variables are highly correlated among themselves,we can make an accurate prediction on the target variable with just one variable.So removing one of the variable can help to reduce the dimensionality.In this method we use 'Pearson's correlation' as a threshold metric to remove correlated features.In short we want the features which are correlated with target feature but avoid having features which are correlated among themselves.
 **Pearson's Correlation Coefficient ranges between -1 (negative relation) and +1 (positive relation).**
 
-#### NOTE : This estimator only works with numeric data and it will raise an error if there are categorical features present in the dataframe.
+#### NOTE : This only works with numeric features and it will raise an error if there are categorical features present in the dataframe.It is preffered to use mostly in Regression problems.
 
 
 ***
