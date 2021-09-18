@@ -563,13 +563,13 @@ x = x.drop(correlated_features, axis="columns")
 #### Note: One of the most advanced algorithms for feature selection are "genetic algorithms".These are stochastic methods for function optimization based on the mechanics of natural genetics and biological evolution.
 
 
-## Forward Selection 
-> Info with Code : 
-> https://www.analyticsvidhya.com/blog/2021/04/forward-feature-selection-and-its-implementation/
+## Forward Selection
+#### Here we begins with an empty model and adds in variables one by one. In each forward step, you add the one variable that gives the best improvement to your model's accuracy.
+> Info with Code : https://www.analyticsvidhya.com/blog/2021/04/forward-feature-selection-and-its-implementation/
 
 ## Backward Elimination
-> Info with Code : 
-> https://www.analyticsvidhya.com/blog/2021/04/backward-feature-elimination-and-its-implementation/?utm_source=blog&utm_medium=Forward_Feature_Elimination
+#### It is opposite of Forward-selection.Here at first we train model using all variables.In each forward step, you remove the one variable that gives the least impact to your model's accuracy.
+> Info with Code : https://www.analyticsvidhya.com/blog/2021/04/backward-feature-elimination-and-its-implementation/?utm_source=blog&utm_medium=Forward_Feature_Elimination
 
 
 ## Recursive Feature Elimination
