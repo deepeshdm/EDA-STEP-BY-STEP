@@ -573,6 +573,16 @@ x = x.drop(correlated_features, axis="columns")
 
 
 ## Recursive Feature Elimination
+#### In this method the model is initially trained using all the features , after that using some metric (depending on the model) , a single or multiple features having the least importance are removed , and the model is trained again using the remaining features.This goes on recursively until a desired number of features are left , these features are of highest importance to the model.It is a type of Backward Elimination.
+
+#### In regular RFE we have to explicitly mention the desired number of best features we want , which is not a great way of finding the best features to increase the accuracy of the model. Hence we make use of Cross validation to find the optimal number of best features from a given set of features.
+
+#### There are 2 types of RFE : 1] RFE without Cross Validation 2] RFE with Cross Validation
+
+### RFE (without Cross Validation)
+
+
+
 
 
 ***
