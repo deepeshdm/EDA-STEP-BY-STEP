@@ -492,6 +492,13 @@ df = remove_features(df,5)
 df.head(10)
 ```
 
+### Pearson's Correlation (filter method)
+#### If two variables are highly correlated among themselves,we can make an accurate prediction on the target variable with just one variable.So removing one of the variable can help to reduce the dimensionality.
+#### NOTE : This estimator only works with numeric data and it will raise an error if there are categorical features present in the dataframe.
+
+
+
+
 ***
 
 
