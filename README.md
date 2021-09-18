@@ -445,10 +445,10 @@ df = df.drop(categorical_features,axis="columns")
 ## Filter Methods (feature selection)
 #### In Filter methods the features are selected on the basis of their scores in various statistical tests for their correlation with the target variable.
 **some common filter methods :** 
-1. Variance Threshold  (for numerical features)
-2. Pearson's Correlation  (for numerical features)
-3. Chi Square Test  (for numerical & categorical features)
-4. Information gain  (for numerical & categorical features)
+1. Variance Threshold  *(for numerical features)*
+2. Pearson's Correlation  *(for numerical features)*
+3. Chi Square Test  *(for numerical & categorical features)*
+4. Information gain  *(for numerical & categorical features)*
 
 
 ## Variance Threshold (filter method)
