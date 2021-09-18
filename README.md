@@ -451,7 +451,7 @@ df = df.drop(categorical_features,axis="columns")
 4. Information gain
 
 
-### Variance Threshold (filter method)
+## Variance Threshold (filter method)
 #### This technique is a quick and lightweight way of eliminating features with very low variance (features with not much useful information).It removes all features whose variance doesn't meet some threshold.By default, it removes all zero-variance features(features that have the same or constant value in all samples).This feature selection algorithm looks only at the features (X), not the desired outputs (y), and can thus be used for unsupervised learning.
 #### NOTE : This estimator only works with numeric data and it will raise an error if there are categorical features present in the dataframe.
 
@@ -492,7 +492,7 @@ df = remove_features(df,5)
 df.head(10)
 ```
 
-### Pearson's Correlation (filter method)
+## Pearson's Correlation (filter method)
 #### If two variables are highly correlated among themselves,we can make an accurate prediction on the target variable with just one variable.So removing one of the variable can help to reduce the dimensionality.
 #### NOTE : This estimator only works with numeric data and it will raise an error if there are categorical features present in the dataframe.
 
