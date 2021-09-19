@@ -278,7 +278,19 @@ df = AV.AutoViz(
 # NOTE : use jupyter notebook or google colab.
 ```
    
+## SweetViz
+#### It is a python library that focuses on exploring the data with the help of beautiful and high-density visualizations. It not only automates the EDA but is also used for comparing datasets and drawing inferences from it.We can create a interactive report and export it as HTML file.
+```python
+import pandas as pd
+import sweetviz as sv
 
+df = pd.read_csv(DATASET_PATH)
+
+sweet_report = sv.analyze(df)
+sweet_report.show_notebook() #display report in jupyter/colab notebook
+
+sweet_report.show_html('eda_report.html')  #save report as html file
+```
 
 
 ***
