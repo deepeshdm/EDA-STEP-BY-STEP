@@ -260,13 +260,28 @@ profile = ProfileReport(df)
 profile.to_file("Analysis.html")
 ```
 #### NOTE : If you have a large dataset,make sure you have GPU orelse use Google Colab.
-<Img src="/Images/pandas_profiling.gif" width="72%">
+<Img src="/Images/pandas_profiling.gif" width="72%"/>
 > see this blog : https://www.analyticsvidhya.com/blog/2021/06/generate-reports-using-pandas-profiling-deploy-using-streamlit/
 
-    
+## AutoViz
+#### There are different libraries in python which are used for data visualization like Matplotlib, Seaborn etc.But while using these libraries we need to define the type of graph to visualize and arguments which we need to visualize.Autoviz performs automatic data-visualization of any dataset with just one line of code. AutoViz can find the most important features and plot impactful visualizations only using those automatically selected features.
+```python
+from autoviz.AutoViz_Class import AutoViz_Class
+
+AV = AutoViz_Class()
+df = AV.AutoViz(
+    filename=DATASET_PATH,
+    depVar="TARGET_FEATURE", #target feature
+    max_rows_analyzed=100,
+    max_cols_analyzed=5)
+
+# NOTE : use jupyter notebook or google colab.
+```
+   
+
+
 
 ***
-
     
     
 # FEATURE ENGINEERING
