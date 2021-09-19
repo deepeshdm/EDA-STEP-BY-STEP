@@ -293,6 +293,17 @@ sweet_report.show_html('eda_report.html')  #save report as html file
 ```
 
 
+## D-Tale
+#### D-Tale generates an interactive GUI in which we can define what we want the data to look like and do analysis of data as we like.This reduces the burden to write complex python code for data-visualization and exploration.We can apply filters,describe statistical characters and visualize data using DTale GUI.
+
+
+
+
+
+
+
+
+
 ***
     
     
