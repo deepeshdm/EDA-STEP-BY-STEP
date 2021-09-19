@@ -245,15 +245,30 @@ for feature in categorical_features:
 
 
 ## Pandas Profiling
-**This library helps us create detailed EDA reports of our dataset with just a single line of code,we can also export these report as html or json.**
+#### This library helps us create detailed EDA reports of our dataset with just a single line of code,we can also export these report as html or json.
+```python
+import pandas as pd
+from pandas_profiling import ProfileReport
 
+DATASET_PATH = r"/content/kc_house_data.csv"
+df = pd.read_csv(DATASET_PATH)
 
+# creating EDA report
+profile = ProfileReport(df)
 
+# exporting report as html file
+profile.to_file("Analysis.html")
+```
+#### NOTE : If you have a large dataset,make sure you have GPU orelse use Google Colab.
+<Img src="/Images/pandas_profiling.gif" width="72%">
+> see this blog : https://www.analyticsvidhya.com/blog/2021/06/generate-reports-using-pandas-profiling-deploy-using-streamlit/
 
-
+    
 
 ***
 
+    
+    
 # FEATURE ENGINEERING
 #### In this stage we use the insights from previous stage to transform data into more suitable format,below are the things we do here:
 * Handle missing/null values
