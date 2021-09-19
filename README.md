@@ -1,4 +1,4 @@
-## Exploratory Data Analysis + (Feature Engineering,Dimensionality Reduction)
+## Exploratory Data Analysis + (Automated EDA,Feature Engineering,Dimensionality Reduction)
 
 #### The Entire Process of EDA is divided into 3 parts :
 #### 1] Data Analysis
@@ -235,7 +235,24 @@ for feature in categorical_features:
 ```
 
 ***
+# AUTOMATED EDA
+#### Here we make use of python libraries made specifically for automating common EDA tasks which also help us analyze the datset more efficiently and faster,some popular libraries are the following :
+* Pandas Profiling
+* DTale
+* Klib
+* AutoViz
+* SweetViz
 
+
+## Pandas Profiling
+**This library helps us create detailed EDA reports of our dataset with just a single line of code,we can also export these report as html or json.**
+
+
+
+
+
+
+***
 
 # FEATURE ENGINEERING
 #### In this stage we use the insights from previous stage to transform data into more suitable format,below are the things we do here:
