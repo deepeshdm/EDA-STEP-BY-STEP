@@ -294,7 +294,30 @@ sweet_report.show_html('eda_report.html')  #save report as html file
 
 
 # KLib
-#### KLib is a python library that provides 'functions' which will help you to explore, clean and prepare your data
+#### KLib is a python library that provides 'functions' which will help you to explore, clean and prepare your data efficiently.
+```python
+import klib
+import pandas as pd
+
+DATASET_PATH = "C:/Users/dipesh/Desktop/Datasets/kc_house_data.csv"
+df = pd.read_csv(DATASET_PATH)
+
+# FUNCTIONS FOR DATA VISUALIZATION
+klib.cat_plot(df)  # Returns a visualisation for number and frequency of categorical features
+klib.corr_mat(df)  # Returns a color-encoded correlation matrix (red for -tive relation,black for +tive relation)
+klib.corr_plot(df)  # Returns a color-encoded heatmap (ideal for correlations)
+klib.dist_plot(df)  # Returns a distribution plot for every numeric feature
+klib.missingval_plot(df)  # Returns a figure containing info about missing values
+
+# FUNCTIONS FOR DATA CLEANING
+klib.data_cleaning(df)  # performs data-cleaning (drop duplicates & empty rows/cols, adjust dtypes,...)
+klib.clean_column_names(df)  # cleans and standardizes column names, also called inside data_cleaning()
+klib.convert_datatypes(df)  # converts existing to more efficient dtypes, also called inside data_cleaning()
+klib.drop_missing(df)  # drops missing values, also called in data_cleaning()
+klib.mv_col_handling(df)  # drops features with high ratio of missing vals based on informational content
+klib.pool_duplicate_subsets(df)  # pools subset of cols based on duplicates with min. loss of information
+```
+> see official docs : https://klib.readthedocs.io/en/latest/
 
 
 ## D-Tale (Not for Beginners)
