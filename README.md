@@ -1,3 +1,18 @@
+### A Checklist of tasks to be done in ML project :
+This checklist can guide you through your Machine Learning projects. There are eight main steps:
+
+* Frame the problem and look at the big picture.
+* Get the data.
+* Explore the data to gain insights.
+* Prepare the data to better expose the underlying data patterns to Machine Learning algorithms.
+* Explore many different models and short-list the best ones.
+* Fine-tune your models and combine them into a great solution.
+* Present your solution.
+* Launch, monitor, and maintain your system.
+
+(See each step briefly [here](https://github.com/deepeshdm/EDA-STEP-BY-STEP/blob/main/ML_CHECKLIST.md).)
+
+
 ## Exploratory Data Analysis + (Automated EDA,Feature Engineering,Dimensionality Reduction)
 
 #### The Entire Process of EDA is divided into 3 parts :
