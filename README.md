@@ -13,7 +13,7 @@ This checklist can guide you through your Machine Learning projects. There are e
 (See each step briefly [here](https://github.com/deepeshdm/EDA-STEP-BY-STEP/blob/main/ML_CHECKLIST.md).)
 
 
-## Exploratory Data Analysis + (Automated EDA,Feature Engineering,Dimensionality Reduction)
+## Exploratory Data Analysis + (Automated EDA,Feature Engineering,Dimensionality Reduction,Time-Series)
 
 #### The Entire Process of EDA is divided into 3 parts :
 #### 1] Data Analysis
