@@ -214,6 +214,77 @@ for feature in continuous_features:
 * Finding outliers using Z-Score or Interquartile-Range
 > see this blog : https://notes88084.blogspot.com/2021/04/exploratory-data-analysis.html
 
+
+### Time-Series Analysis (Univariate)
+##### If you have any date variable,then it is necessary to analyze the continuous variables against them to see how each continuous variable changes over time.
+
+* Resampling - change the aggregation level of a time series. If you have data collected in hourly intervals but need daily totals for the analysis, resampling is the way to go
+```python
+"""
+Some commonly used time-series frequencies : 
+Y : year end frequency
+Q : quarter end frequency
+M : month end frequency
+W : weekly frequency
+M : hour end frequency
+"""
+
+import pandas as pd
+DATASET_PATH = r"C:\Users\dipesh\Desktop\Datasets\LTOTALNSA.csv"
+DATE_COLUMN = "DATE"
+
+# parse_dates : parses dates from string to DatetimeIndex
+# index_col : set specified column as dataset index
+df = pd.read_csv(DATASET_PATH,parse_dates=[DATE_COLUMN],index_col=DATE_COLUMN)
+
+# resample data from monthly to yearly
+df_yearly = df.resample(rule="Y").sum()
+
+print(df_yearly.head(30))
+```
+##### NOTE : It is easy to go from monthly to yearly data,or from hourly to daily but it’s impossible to do the opposite.
+
+* Moving Average - plot a moving average graph to make graph smooth and highlight key components.
+```python
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Higher the size,smoother the chart
+WINDOW_SIZE = 10
+DATE_COLUMN = "Births"
+
+df = pd.read_csv(r"C:\Users\dipesh\Desktop\Datasets\daily female births dataset.csv")
+
+# calculating SMA over a window-size of 10 days
+df_sma = df[DATE_COLUMN].rolling(WINDOW_SIZE).mean()
+
+df.plot(x="Date", color='green', linewidth=3, figsize=(12, 6))
+# plot calculated moving average
+df_sma.plot(color='red', linewidth=3, figsize=(12, 6))
+plt.title("Daily Female Births")
+plt.ylabel("Births")
+plt.show()
+```
+
+* Decompose Trend,Seasonality & Residuals from the time-series.This will help discover any seasonal patterns & upcoming trends.
+```python
+import matplotlib.pyplot as plt
+import pandas as pd
+from statsmodels.tsa.seasonal import seasonal_decompose
+DATASET_PATH = r"C:\Users\dipesh\Desktop\Datasets\LTOTALNSA.csv"
+DATE_COLUMN = "DATE"
+SALES_COLUMN = "LTOTALNSA"
+
+# parse_dates : parses dates from string to DatetimeIndex
+# index_col : set specified column as dataset index
+df = pd.read_csv(DATASET_PATH,parse_dates=[DATE_COLUMN],index_col=DATE_COLUMN)
+
+# Decompose and plot
+decomposed = seasonal_decompose(df, model='multiplicative')
+decomposed.plot()
+plt.show()
+```
+
 ***
 
 ## Analyze Categorical Variables
