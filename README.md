@@ -320,6 +320,116 @@ for feature in categorical_features:
     plt.show()
 ```
 
+### Check for Imbalanced Dataset (In Classification problem)
+
+* Scatterplot of Imbalanced dataset
+```python
+import pandas as pd
+from sklearn.datasets import make_classification
+import matplotlib.pyplot as plt
+
+#------------------------------------------------------------
+
+# create dataset
+x, y = make_classification(n_samples=5000,
+                           n_features=2,
+                           n_redundant=0,
+                           random_state=1,
+                           n_clusters_per_class=1,
+                           weights=[0.9], flip_y=0)
+x = pd.DataFrame(x)
+y = pd.DataFrame(y)
+
+# concatinate columns
+df = pd.concat([x, y], axis=1)
+# change column names
+df.columns = ["X1", "X2", "Y"]
+
+#------------------------------------------------------------
+
+plt.figure(figsize=(6,6))
+plt.scatter(df["X1"],df["X2"],c=df["Y"],alpha=0.6)
+plt.xlabel("X1")
+plt.ylabel("X2")
+plt.title("Scatterplot of Imbalanced dataset")
+plt.show()
+```
+
+* Bar-Graph of Imbalanced dataset
+```python
+import pandas as pd
+from sklearn.datasets import make_classification
+import matplotlib.pyplot as plt
+
+#------------------------------------------------------------
+
+# create dataset
+x, y = make_classification(n_samples=5000,
+                           n_features=2,
+                           n_redundant=0,
+                           random_state=1,
+                           n_clusters_per_class=1,
+                           weights=[0.9], flip_y=0)
+x = pd.DataFrame(x)
+y = pd.DataFrame(y)
+
+# concatinate columns
+df = pd.concat([x, y], axis=1)
+# change column names
+df.columns = ["X1", "X2", "Y"]
+
+#------------------------------------------------------------
+
+plt.figure(figsize=(6,6))
+plt.hist(df["Y"])
+plt.xlabel("Class")
+plt.ylabel("Count")
+plt.title("Bar-Chart of Imbalanced dataset")
+plt.show()
+```
+
+* Print percentage of each class in Imbalanced dataset
+```python
+import pandas as pd
+from sklearn.datasets import make_classification
+
+#------------------------------------------------------------
+
+# create dataset
+x, y = make_classification(n_samples=5000,
+                           n_features=2,
+                           n_redundant=0,
+                           random_state=1,
+                           n_clusters_per_class=1,
+                           weights=[0.9], flip_y=0)
+x = pd.DataFrame(x)
+y = pd.DataFrame(y)
+
+# concatinate columns
+df = pd.concat([x, y], axis=1)
+# change column names
+df.columns = ["X1", "X2", "Y"]
+
+#------------------------------------------------------------
+
+# prints percentage of each class in dataset
+
+total_samples = len(df)
+counts = df["Y"].value_counts()
+c_index = counts.index
+
+for i in range(len(c_index)):
+    print(f"{c_index[i]} class takes over "
+          f"{(counts[i]/total_samples)*100} % OR {counts[i]} samples of dataset")
+
+"""
+OUTPUT :
+0 class takes over 90.02 % OR 4501 samples of dataset
+1 class takes over 9.98 % OR 499 samples of dataset
+"""
+```
+
+
 ***
 # AUTOMATED EDA
 #### Here we make use of python libraries made specifically for automating common EDA tasks which also help us analyze the datset more efficiently and faster,some popular libraries are the following :
