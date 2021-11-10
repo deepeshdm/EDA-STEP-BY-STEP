@@ -306,6 +306,18 @@ for feature in categorical_features:
     print('The feature is {} and no. of categories are {}'.format(feature,len(df[feature].unique())))
 ```
 
+* Create Histogram of all variables to find the distribution of their values
+```python
+
+# creating histograms of all features
+df.hist(figsize=(17,17))
+plt.xlabel("value")
+plt.ylabel("count")
+plt.show()
+
+```
+
+
 ##### NOTE : Categorical variables are usually of 2 type : Nominal & Ordinal.Depending on the Cardinality we can choose if we need to use one-hot encoding or label-encoding. Mostly we use one hot encoding for nominal variable,label encoding for ordinal variable
 
 * Find the relationship between categorical variables and dependent feature
