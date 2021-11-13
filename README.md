@@ -317,6 +317,19 @@ plt.show()
 
 ```
 
+* Create a countplot of all variales using seaborn
+```python
+features = list(df.columns) # list of all feature names
+
+# plotting countplots for each feature
+for feature in features:
+  plt.figure(figsize=(25,15))
+  plt.xlabel(feature,fontsize=18)
+  sns.countplot(df[feature],hue='target_variable',data=df)
+  plt.ylabel("Number of Samples",fontsize=18)
+  plt.show()
+```
+
 
 ##### NOTE : Categorical variables are usually of 2 type : Nominal & Ordinal.Depending on the Cardinality we can choose if we need to use one-hot encoding or label-encoding. Mostly we use one hot encoding for nominal variable,label encoding for ordinal variable
 
