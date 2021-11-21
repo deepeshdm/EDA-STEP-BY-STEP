@@ -63,6 +63,14 @@ df.info()     #prints info about features(dtype,non-null values,memory usage etc
 df.describe()   #describe statistics of features (mean,median,mode,count etc)
 df.corr()     #computes pairwise pearson's correlation among features
 ```
+* Plot multiple pairwise bivariate distributions in a dataset
+```python
+import seaborn
+import matplotlib.pyplot as plt
+seaborn.pairplot(df, hue ="TARGET VARIABLE")
+plt.show()
+```
+
 
 * Finding variables with missing/null values and percentage of missing/null values.
 ```python
