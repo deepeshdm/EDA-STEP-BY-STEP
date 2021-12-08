@@ -44,6 +44,11 @@ This checklist can guide you through your Machine Learning projects. There are e
 
 #### NOTE : In Data Analysis our task is only to find insights and not to make any changes (like removing rows/columns or imputing missing values).After this stage we take these insights and make changes to the dataset in the feature engineering stage.Though this is not a hard rule and you can take any required steps as per your task.
 
+<div align="center">
+<img src="/Images/choosing-a-good-chart-09-1.jpg" width="95%"/>
+</div>
+
+   
 ### Import Python Packages
 ```python
 import numpy as np
@@ -489,7 +494,9 @@ profile = ProfileReport(df)
 profile.to_file("Analysis.html")
 ```
 #### NOTE : If you have a large dataset,make sure you have GPU orelse use Google Colab.
+<div align="center">
 <Img src="/Images/pandas_profiling.gif" width="72%"/>
+</div>
 > see this blog : https://www.analyticsvidhya.com/blog/2021/06/generate-reports-using-pandas-profiling-deploy-using-streamlit/
 
 ## AutoViz
@@ -616,16 +623,19 @@ for feature in categorical_with_nan:
 
 > see this blog : https://notes88084.blogspot.com/2021/04/exploratory-data-analysis.html
 
+<div align="center">
 <img src="/Images/missing_values_graph.png" width="58%">
-
+</div>
 
 ## Handle outliers in numerical features
 #### Outliers can be of 2 types :
 >* Artificial : outliers created unintentionally due to error during data collection.
 >* Natural : outlier which is not artificial.
 
+<div align="center">
 <img src="/Images/outliers_sensitive.png" width="58%">
-
+</div>
+    
 #### Common ways to deal with outliers :
 * Delete outliers
 * Replacing outliers with Mean/Median/Mode (only if outlier is artificial)
@@ -683,8 +693,10 @@ The 2 main types of feature scaling methods :
 * Normalization : features will be rescaled to range of [0,1]
 * Standardization : features will be rescaled so that they’ll have the properties of a standard normal distribution with mean, μ=0 and standard deviation, σ=1.
 
+<div align="center">
 <img src="/Images/feature_scaling.png" width="58%">
-
+</div>
+    
 > see this blog : https://notes88084.blogspot.com/2021/04/exploratory-data-analysis.html
 
 #### Normalization with SkLearn
@@ -754,8 +766,9 @@ df = pd.concat([df,new_encoded_columns],axis="columns")
 # dropping the categorical variables since they are redundant now.
 df = df.drop(categorical_features,axis="columns")
 ```
+<div align="center">
 <img src="EDA Examples/dummy_variable_trap.png" width="58%">
-
+</div>
 
 ***
 # DIMENSIONALITY REDUCTION
