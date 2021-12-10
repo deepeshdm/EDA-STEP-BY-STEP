@@ -1,0 +1,922 @@
+<h3 id="a-checklist-of-tasks-to-be-done-in-ml-project">A Checklist of tasks to be done in ML project :</h3>
+<p>This checklist can guide you through your Machine Learning projects. There are eight main steps:</p>
+<ul>
+<li>Frame the problem and look at the big picture.</li>
+<li>Get the data.</li>
+<li>Explore the data to gain insights.</li>
+<li>Prepare the data to better expose the underlying data patterns to Machine Learning algorithms.</li>
+<li>Explore many different models and short-list the best ones.</li>
+<li>Fine-tune your models and combine them into a great solution.</li>
+<li>Present your solution.</li>
+<li>Launch, monitor, and maintain your system.</li>
+</ul>
+<p>(See each step briefly <a href="https://github.com/deepeshdm/EDA-STEP-BY-STEP/blob/main/ML_CHECKLIST.md">here</a>.)</p>
+<h2 id="exploratory-data-analysis-automated-edafeature-engineeringdimensionality-reductiontime-series">Exploratory Data Analysis + (Automated EDA,Feature Engineering,Dimensionality Reduction,Time-Series)</h2>
+<h4 id="the-entire-process-of-eda-is-divided-into-3-parts">The Entire Process of EDA is divided into 3 parts :</h4>
+<h4 id="data-analysis">1] Data Analysis</h4>
+<h4 id="feature-engineering">2] Feature Engineering</h4>
+<h4 id="dimensionality-reduction-feature-selectionfeature-extraction">3] Dimensionality Reduction (Feature selection,Feature extraction)</h4>
+<h4 id="note-this-is-a-general-process-to-perform-edadepending-on-your-dataset-and-task-at-handyou-may-use-all-or-only-a-few-of-the-steps-defined-below.">NOTE : This is a general process to perform EDA,depending on your dataset and task at hand,you may use all or only a few of the steps defined below.</h4>
+<hr />
+<h3 id="useful-links">Useful Links :</h3>
+<h4 id="top-50-matplotlib-charts-httpswww.machinelearningplus.complotstop-50-matplotlib-visualizations-the-master-plots-python">Top 50 matplotlib charts : https://www.machinelearningplus.com/plots/top-50-matplotlib-visualizations-the-master-plots-python/</h4>
+<hr />
+<h4 id="exploratory-data-analysis-is-performed-only-on-structured-datasets.these-structured-datasets-have-2-types-of-features">Exploratory Data Analysis is performed only on structured datasets.These structured datasets have 2 types of features :</h4>
+<h4 id="a-numerical-of-2-types-discretecontinuous">A) Numerical (of 2 types : Discrete,Continuous)</h4>
+<h4 id="b-categorical-of-2-types-nominalordinal">B) Categorical (of 2 types : Nominal,Ordinal)</h4>
+<hr />
+<h1 id="data-analysis-1">DATA ANALYSIS</h1>
+<h3 id="in-this-step-we-take-a-high-level-look-at-our-dataset-and-gain-insights-on-topics-mentioned-below">In this step we take a high level look at our dataset and gain insights on topics mentioned below:</h3>
+<ul>
+<li>Shape of Dataset (number of rows and columns)</li>
+<li>Number of Numerical &amp; Categorcial Features</li>
+<li>Features with most missing/null values</li>
+<li>Cardinality of Each Categorical Features</li>
+<li>Distribution of Numerical Features</li>
+<li>Detecting Features with most Outliers</li>
+<li>Finding relationship between Independent &amp; Dependent variables</li>
+</ul>
+<h4 id="note-in-data-analysis-our-task-is-only-to-find-insights-and-not-to-make-any-changes-like-removing-rowscolumns-or-imputing-missing-values.after-this-stage-we-take-these-insights-and-make-changes-to-the-dataset-in-the-feature-engineering-stage.though-this-is-not-a-hard-rule-and-you-can-take-any-required-steps-as-per-your-task.">NOTE : In Data Analysis our task is only to find insights and not to make any changes (like removing rows/columns or imputing missing values).After this stage we take these insights and make changes to the dataset in the feature engineering stage.Though this is not a hard rule and you can take any required steps as per your task.</h4>
+<div data-align="center">
+<p><img src="/Images/choosing-a-good-chart-09-1.jpg" width="95%"/></p>
+</div>
+<h3 id="import-python-packages">Import Python Packages</h3>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span></code></pre></div>
+<hr />
+<h2 id="data-analysis-step-by-step">Data Analysis Step-By-Step</h2>
+<h3 id="df-is-dataset-dataframetarget_feature-is-continuous-egprice">(“df” is dataset dataframe,Target_Feature is continuous eg:price)</h3>
+<ul>
+<li>Describe the Dataset using comman pandas functions</li>
+</ul>
+<div class="sourceCode" id="cb2"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true"></a>df.info()     <span class="co">#prints info about features(dtype,non-null values,memory usage etc)</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true"></a>df.describe()   <span class="co">#describe statistics of features (mean,median,mode,count etc)</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true"></a>df.corr()     <span class="co">#computes pairwise pearson&#39;s correlation among features</span></span></code></pre></div>
+<ul>
+<li>Plot multiple pairwise bivariate distributions in a dataset</li>
+</ul>
+<div class="sourceCode" id="cb3"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true"></a><span class="im">import</span> seaborn</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true"></a>seaborn.pairplot(df, hue <span class="op">=</span><span class="st">&quot;TARGET VARIABLE&quot;</span>)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true"></a>plt.show()</span></code></pre></div>
+<ul>
+<li>Finding variables with missing/null values and percentage of missing/null values.</li>
+</ul>
+<div class="sourceCode" id="cb4"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true"></a>features_with_na <span class="op">=</span> [feature <span class="cf">for</span> feature <span class="kw">in</span> df.columns <span class="cf">if</span> df[feature].isnull().<span class="bu">sum</span>() <span class="op">&gt;</span> <span class="dv">1</span>]</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true"></a><span class="cf">for</span> feature <span class="kw">in</span> features_with_na :</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true"></a>    <span class="bu">print</span>(feature,<span class="st">&quot;  &quot;</span>,np.<span class="bu">round</span>(df[feature].isnull().mean(),<span class="dv">4</span>),<span class="st">&quot;% missing values&quot;</span>)</span></code></pre></div>
+<h5 id="note-in-order-to-decide-if-we-should-remove-or-keep-the-features-with-missingnull-values-we-need-to-find-their-relationship-with-the-dependent-variable-and-see-if-they-are-of-any-significance.">NOTE : In order to decide if we should remove or keep the features with missing/null values we need to find their relationship with the dependent variable and see if they are of any significance.</h5>
+<ul>
+<li>Plot Bar-Graphs of TARGET_FEATURE against features with missing/null values</li>
+</ul>
+<div class="sourceCode" id="cb5"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true"></a><span class="cf">for</span> feature <span class="kw">in</span> features_with_na:</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true"></a>    data <span class="op">=</span> df.copy()</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true"></a>    </span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true"></a>    <span class="co"># let&#39;s make a variable that indicates 1 if the observation was missing or zero otherwise</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true"></a>    data[feature] <span class="op">=</span> np.where(data[feature].isnull(), <span class="dv">1</span>, <span class="dv">0</span>)</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true"></a>    </span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true"></a>    data.groupby(feature)[<span class="st">&quot;TARGET_FEATURE&quot;</span>].median().plot.bar()</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true"></a>    plt.title(feature)</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true"></a>    plt.show()</span></code></pre></div>
+<hr />
+<h2 id="analyze-numerical-variables">Analyze Numerical Variables</h2>
+<ul>
+<li>Find number of numerical features in dataset</li>
+</ul>
+<div class="sourceCode" id="cb6"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true"></a><span class="co"># list of all numerical variables in dataset</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true"></a>numerical_features <span class="op">=</span> [feature <span class="cf">for</span> feature <span class="kw">in</span> df.columns <span class="cf">if</span> df[feature].dtypes <span class="op">!=</span> <span class="st">&#39;O&#39;</span>]</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true"></a></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true"></a><span class="bu">print</span>(<span class="st">&#39;Number of numerical variables: &#39;</span>, <span class="bu">len</span>(numerical_features))</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true"></a></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true"></a><span class="co"># visualise the numerical variables</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true"></a>df[numerical_features].head()</span></code></pre></div>
+<h5 id="note-numerical-variables-are-usually-of-2-type-continous-discrete-variablesanalyze-them-seperately">NOTE : Numerical variables are usually of 2 type : Continous &amp; Discrete Variables,Analyze them seperately</h5>
+<h3 id="analyze-discrete-variables">Analyze Discrete Variables</h3>
+<ul>
+<li>Find number of Discrete features in dataset</li>
+</ul>
+<div class="sourceCode" id="cb7"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true"></a><span class="co"># list of all discrete variables in dataset</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true"></a>discrete_features<span class="op">=</span>[feature <span class="cf">for</span> feature <span class="kw">in</span> numerical_features <span class="cf">if</span> <span class="bu">len</span>(df[feature].unique())<span class="op">&lt;</span><span class="dv">25</span>]</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true"></a></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true"></a><span class="bu">print</span>(<span class="st">&#39;Number of Discrete variables: &#39;</span>, <span class="bu">len</span>(discrete_features))</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true"></a></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true"></a><span class="co"># visualise the numerical variables</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true"></a>df[discrete_features].head()</span></code></pre></div>
+<ul>
+<li>Find the realtionship between them and dependent variable by plotting graphs</li>
+</ul>
+<div class="sourceCode" id="cb8"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true"></a><span class="cf">for</span> feature <span class="kw">in</span> discrete_features:</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true"></a>    data<span class="op">=</span>df.copy()</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true"></a>    data.groupby(feature)[<span class="st">&quot;TARGET_FEATURE&quot;</span>].median().plot.bar()</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true"></a>    plt.xlabel(feature)</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true"></a>    plt.ylabel(<span class="st">&quot;TARGET_FEATURE&quot;</span>)</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true"></a>    plt.title(feature)</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true"></a>    plt.show()</span></code></pre></div>
+<h3 id="analyze-continuous-variables">Analyze Continuous Variables</h3>
+<ul>
+<li>Find number of Continuous features in dataset</li>
+</ul>
+<div class="sourceCode" id="cb9"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true"></a><span class="co"># list of all continuous variables in dataset</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true"></a>continuous_features<span class="op">=</span>[feature <span class="cf">for</span> feature <span class="kw">in</span> numerical_features <span class="cf">if</span> feature <span class="kw">not</span> <span class="kw">in</span> discrete_features]</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true"></a></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true"></a><span class="bu">print</span>(<span class="st">&#39;Number of Continuous variables: &#39;</span>, <span class="bu">len</span>(continuous_features))</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true"></a></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true"></a><span class="co"># visualise the numerical variables</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true"></a>df[continuous_features].head()</span></code></pre></div>
+<ul>
+<li>Plot Scatterplots of TARGET_FEATURE against each Continuous Feature</li>
+</ul>
+<div class="sourceCode" id="cb10"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true"></a><span class="co"># Plotting Scatterplots of each continuous feature against TARGET_FEATURE</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true"></a><span class="cf">for</span> feature <span class="kw">in</span> continuous_features:</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true"></a>    data<span class="op">=</span>df.copy()</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true"></a>    plt.scatter(df[feature],df[<span class="st">&quot;TARGET_FEATURE&quot;</span>])</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true"></a>    plt.xlabel(feature)</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true"></a>    plt.ylabel(<span class="st">&quot;TARGET_FEATURE&quot;</span>)</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true"></a>    plt.show()</span></code></pre></div>
+<ul>
+<li>Plot Scatterplots of Continuous Features against each other</li>
+</ul>
+<div class="sourceCode" id="cb11"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true"></a><span class="co"># </span><span class="al">NOTE</span><span class="co"> : Dont do this if you have more than 3 variables,since it&#39;ll create a very large numbers </span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true"></a><span class="co"># of plots and it wont be possible to visualize them all at once. </span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true"></a><span class="co"># You can use &quot;df.corr()&quot; to find the correlation among the features</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true"></a></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true"></a><span class="co"># Eg : If you have 10 continuous features,then it&#39;ll create (10x10)=100 scatterplots</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true"></a></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true"></a><span class="co"># Plotting Scatterplots of each continuous feature against TARGET_FEATURE</span></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true"></a><span class="cf">for</span> feature1 <span class="kw">in</span> continuous_features:</span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true"></a>    <span class="cf">for</span> feature2 <span class="kw">in</span> continuous_features:</span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true"></a>            data<span class="op">=</span>df.copy()</span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true"></a>            plt.scatter(df[feature1],df[feature2])</span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true"></a>            plt.xlabel(feature1)</span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true"></a>            plt.ylabel(feature2)</span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true"></a>            plt.show()</span></code></pre></div>
+<h5 id="note-plotting-scatterplots-of-continuous-features-against-target-variable-and-against-each-other-help-is-determine-the-correlation-among-them.this-is-particularly-helpful-for-regression-problemwhere-we-only-want-to-keep-features-that-have-high-correlation-with-the-target-variable-and-low-correlation-among-themselves.">NOTE : Plotting Scatterplots of Continuous features against target variable and against each other help is determine the “correlation” among them.This is particularly helpful for Regression problem,where we only want to “keep features that have high-correlation with the target variable and low-correlation among themselves”.</h5>
+<ul>
+<li>Find the Distribution of values in each Continuous feature (create histograms)</li>
+</ul>
+<div class="sourceCode" id="cb12"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true"></a><span class="co">## </span><span class="al">NOTE</span><span class="co"> : If the distributions are skewed we may need to transform them into another format like (Standard Distribution).</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true"></a><span class="co">## Such data can be handled by following ways :</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true"></a><span class="co"># 1] Log Transform (mostly used)</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true"></a><span class="co"># 2] Box Cox Transform</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true"></a><span class="co"># 3] Square Root Transform</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true"></a></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true"></a><span class="cf">for</span> feature <span class="kw">in</span> continuous_features:</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true"></a>    data<span class="op">=</span>df.copy()</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true"></a>    data[feature].hist(bins<span class="op">=</span><span class="dv">25</span>)</span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true"></a>    plt.xlabel(feature)</span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true"></a>    plt.ylabel(<span class="st">&quot;Count&quot;</span>)</span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true"></a>    plt.show()</span></code></pre></div>
+<h5 id="note-it-is-very-important-to-know-the-distribution-of-values-in-continuous-featuresin-case-the-distribution-is-skewed-right-skewed-or-left-skewed-we-need-to-transform-it-into-another-format-like-standard-distribution-during-feature-engneering.this-is-a-must-step-in-a-regression-problem.">NOTE : It is very important to know the distribution of values in continuous features,in case the distribution is “Skewed” (Right Skewed or Left Skewed) we need to transform it into another format like Standard-Distribution during Feature-Engneering.This is a MUST step in a Regression Problem.</h5>
+<h3 id="outliers-in-continuous-variables">Outliers in Continuous Variables</h3>
+<ul>
+<li>Finding outliers distribution in each feature by creating their box-plot</li>
+</ul>
+<div class="sourceCode" id="cb13"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true"></a></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true"></a><span class="co"># </span><span class="al">NOTE</span><span class="co"> : This works only for continuous variables and not for categorical</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true"></a></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true"></a><span class="cf">for</span> feature <span class="kw">in</span> continuous_features:</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true"></a>    data<span class="op">=</span>df.copy()</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true"></a>    <span class="cf">if</span> <span class="dv">0</span> <span class="kw">in</span> data[feature].unique():</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true"></a>        <span class="cf">pass</span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true"></a>    <span class="cf">else</span>:</span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true"></a>        <span class="co"># applying log Transformation</span></span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true"></a>        data[feature]<span class="op">=</span>np.log(data[feature])</span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true"></a>        data.boxplot(column<span class="op">=</span>feature)</span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true"></a>        plt.ylabel(feature)</span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true"></a>        plt.title(feature)</span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true"></a>        plt.show()</span></code></pre></div>
+<ul>
+<li>Finding outliers using Z-Score or Interquartile-Range &gt; see this blog : https://notes88084.blogspot.com/2021/04/exploratory-data-analysis.html</li>
+</ul>
+<h3 id="time-series-analysis-univariate">Time-Series Analysis (Univariate)</h3>
+<h5 id="if-you-have-any-date-variablethen-it-is-necessary-to-analyze-the-continuous-variables-against-them-to-see-how-each-continuous-variable-changes-over-time.">If you have any date variable,then it is necessary to analyze the continuous variables against them to see how each continuous variable changes over time.</h5>
+<ul>
+<li>Resampling - change the aggregation level of a time series. If you have data collected in hourly intervals but need daily totals for the analysis, resampling is the way to go</li>
+</ul>
+<div class="sourceCode" id="cb14"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true"></a><span class="co">&quot;&quot;&quot;</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true"></a><span class="co">Some commonly used time-series frequencies : </span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true"></a><span class="co">Y : year end frequency</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true"></a><span class="co">Q : quarter end frequency</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true"></a><span class="co">M : month end frequency</span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true"></a><span class="co">W : weekly frequency</span></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true"></a><span class="co">M : hour end frequency</span></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true"></a><span class="co">&quot;&quot;&quot;</span></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true"></a></span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true"></a>DATASET_PATH <span class="op">=</span> <span class="vs">r&quot;C:\Users\dipesh\Desktop\Datasets\LTOTALNSA.csv&quot;</span></span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true"></a>DATE_COLUMN <span class="op">=</span> <span class="st">&quot;DATE&quot;</span></span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true"></a></span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true"></a><span class="co"># parse_dates : parses dates from string to DatetimeIndex</span></span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true"></a><span class="co"># index_col : set specified column as dataset index</span></span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true"></a>df <span class="op">=</span> pd.read_csv(DATASET_PATH,parse_dates<span class="op">=</span>[DATE_COLUMN],index_col<span class="op">=</span>DATE_COLUMN)</span>
+<span id="cb14-17"><a href="#cb14-17" aria-hidden="true"></a></span>
+<span id="cb14-18"><a href="#cb14-18" aria-hidden="true"></a><span class="co"># resample data from monthly to yearly</span></span>
+<span id="cb14-19"><a href="#cb14-19" aria-hidden="true"></a>df_yearly <span class="op">=</span> df.resample(rule<span class="op">=</span><span class="st">&quot;Y&quot;</span>).<span class="bu">sum</span>()</span>
+<span id="cb14-20"><a href="#cb14-20" aria-hidden="true"></a></span>
+<span id="cb14-21"><a href="#cb14-21" aria-hidden="true"></a><span class="bu">print</span>(df_yearly.head(<span class="dv">30</span>))</span></code></pre></div>
+<h5 id="note-it-is-easy-to-go-from-monthly-to-yearly-dataor-from-hourly-to-daily-but-its-impossible-to-do-the-opposite.">NOTE : It is easy to go from monthly to yearly data,or from hourly to daily but it’s impossible to do the opposite.</h5>
+<ul>
+<li>Moving Average - plot a moving average graph to make graph smooth and highlight key components.</li>
+</ul>
+<div class="sourceCode" id="cb15"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true"></a></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true"></a><span class="co"># Higher the size,smoother the chart</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true"></a>WINDOW_SIZE <span class="op">=</span> <span class="dv">10</span></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true"></a>DATE_COLUMN <span class="op">=</span> <span class="st">&quot;Births&quot;</span></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true"></a></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true"></a>df <span class="op">=</span> pd.read_csv(<span class="vs">r&quot;C:\Users\dipesh\Desktop\Datasets\daily female births dataset.csv&quot;</span>)</span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true"></a></span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true"></a><span class="co"># calculating SMA over a window-size of 10 days</span></span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true"></a>df_sma <span class="op">=</span> df[DATE_COLUMN].rolling(WINDOW_SIZE).mean()</span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true"></a></span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true"></a>df.plot(x<span class="op">=</span><span class="st">&quot;Date&quot;</span>, color<span class="op">=</span><span class="st">&#39;green&#39;</span>, linewidth<span class="op">=</span><span class="dv">3</span>, figsize<span class="op">=</span>(<span class="dv">12</span>, <span class="dv">6</span>))</span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true"></a><span class="co"># plot calculated moving average</span></span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true"></a>df_sma.plot(color<span class="op">=</span><span class="st">&#39;red&#39;</span>, linewidth<span class="op">=</span><span class="dv">3</span>, figsize<span class="op">=</span>(<span class="dv">12</span>, <span class="dv">6</span>))</span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true"></a>plt.title(<span class="st">&quot;Daily Female Births&quot;</span>)</span>
+<span id="cb15-17"><a href="#cb15-17" aria-hidden="true"></a>plt.ylabel(<span class="st">&quot;Births&quot;</span>)</span>
+<span id="cb15-18"><a href="#cb15-18" aria-hidden="true"></a>plt.show()</span></code></pre></div>
+<ul>
+<li>Decompose Trend,Seasonality &amp; Residuals from the time-series.This will help discover any seasonal patterns &amp; upcoming trends.</li>
+</ul>
+<div class="sourceCode" id="cb16"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true"></a><span class="im">from</span> statsmodels.tsa.seasonal <span class="im">import</span> seasonal_decompose</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true"></a>DATASET_PATH <span class="op">=</span> <span class="vs">r&quot;C:\Users\dipesh\Desktop\Datasets\LTOTALNSA.csv&quot;</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true"></a>DATE_COLUMN <span class="op">=</span> <span class="st">&quot;DATE&quot;</span></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true"></a>SALES_COLUMN <span class="op">=</span> <span class="st">&quot;LTOTALNSA&quot;</span></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true"></a></span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true"></a><span class="co"># parse_dates : parses dates from string to DatetimeIndex</span></span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true"></a><span class="co"># index_col : set specified column as dataset index</span></span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true"></a>df <span class="op">=</span> pd.read_csv(DATASET_PATH,parse_dates<span class="op">=</span>[DATE_COLUMN],index_col<span class="op">=</span>DATE_COLUMN)</span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true"></a></span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true"></a><span class="co"># Decompose and plot</span></span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true"></a>decomposed <span class="op">=</span> seasonal_decompose(df, model<span class="op">=</span><span class="st">&#39;multiplicative&#39;</span>)</span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true"></a>decomposed.plot()</span>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true"></a>plt.show()</span></code></pre></div>
+<hr />
+<h2 id="analyze-categorical-variables">Analyze Categorical Variables</h2>
+<ul>
+<li>Find number of categorical features in dataset</li>
+</ul>
+<div class="sourceCode" id="cb17"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true"></a><span class="co"># list of all categorical variables in dataset</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true"></a>categorical_features<span class="op">=</span>[feature <span class="cf">for</span> feature <span class="kw">in</span> df.columns <span class="cf">if</span> df[feature].dtypes<span class="op">==</span><span class="st">&#39;O&#39;</span>]</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true"></a></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true"></a><span class="bu">print</span>(<span class="st">&#39;Number of categorical variables: &#39;</span>, <span class="bu">len</span>(categorical_features))</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true"></a></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true"></a><span class="co"># visualise the numerical variables</span></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true"></a>df[categorical_features].head()</span></code></pre></div>
+<ul>
+<li>Find the Cardinality i.e number of categories in each categorical feature</li>
+</ul>
+<div class="sourceCode" id="cb18"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true"></a><span class="cf">for</span> feature <span class="kw">in</span> categorical_features:</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true"></a>    <span class="bu">print</span>(<span class="st">&#39;The feature is </span><span class="sc">{}</span><span class="st"> and no. of categories are </span><span class="sc">{}</span><span class="st">&#39;</span>.<span class="bu">format</span>(feature,<span class="bu">len</span>(df[feature].unique())))</span></code></pre></div>
+<ul>
+<li>Create Histogram of all variables to find the distribution of their values</li>
+</ul>
+<div class="sourceCode" id="cb19"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true"></a></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true"></a><span class="co"># creating histograms of all features</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true"></a>df.hist(figsize<span class="op">=</span>(<span class="dv">17</span>,<span class="dv">17</span>))</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true"></a>plt.xlabel(<span class="st">&quot;value&quot;</span>)</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true"></a>plt.ylabel(<span class="st">&quot;count&quot;</span>)</span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true"></a>plt.show()</span></code></pre></div>
+<ul>
+<li>Create a countplot of all variales using seaborn</li>
+</ul>
+<div class="sourceCode" id="cb20"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true"></a>features <span class="op">=</span> <span class="bu">list</span>(df.columns) <span class="co"># list of all feature names</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true"></a></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true"></a><span class="co"># plotting countplots for each feature</span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true"></a><span class="cf">for</span> feature <span class="kw">in</span> features:</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true"></a>  plt.figure(figsize<span class="op">=</span>(<span class="dv">25</span>,<span class="dv">15</span>))</span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true"></a>  plt.xlabel(feature,fontsize<span class="op">=</span><span class="dv">18</span>)</span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true"></a>  sns.countplot(df[feature],hue<span class="op">=</span><span class="st">&#39;target_variable&#39;</span>,data<span class="op">=</span>df)</span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true"></a>  plt.ylabel(<span class="st">&quot;Number of Samples&quot;</span>,fontsize<span class="op">=</span><span class="dv">18</span>)</span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true"></a>  plt.show()</span></code></pre></div>
+<h5 id="note-categorical-variables-are-usually-of-2-type-nominal-ordinal.depending-on-the-cardinality-we-can-choose-if-we-need-to-use-one-hot-encoding-or-label-encoding.-mostly-we-use-one-hot-encoding-for-nominal-variablelabel-encoding-for-ordinal-variable">NOTE : Categorical variables are usually of 2 type : Nominal &amp; Ordinal.Depending on the Cardinality we can choose if we need to use one-hot encoding or label-encoding. Mostly we use one hot encoding for nominal variable,label encoding for ordinal variable</h5>
+<ul>
+<li>Find the relationship between categorical variables and dependent feature (Here the target_feature is continuous,eg-price)</li>
+</ul>
+<div class="sourceCode" id="cb21"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true"></a><span class="cf">for</span> feature <span class="kw">in</span> categorical_features:</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true"></a>    data<span class="op">=</span>df.copy()</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true"></a>    data.groupby(feature)[<span class="st">&quot;TARGET_FEATURE&quot;</span>].median().plot.bar()</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true"></a>    plt.xlabel(feature)</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true"></a>    plt.ylabel(<span class="st">&quot;TARGET_FEATURE&quot;</span>)</span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true"></a>    plt.title(feature)</span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true"></a>    plt.show()</span></code></pre></div>
+<h3 id="check-for-imbalanced-dataset-in-classification-problem">Check for Imbalanced Dataset (In Classification problem)</h3>
+<ul>
+<li>Scatterplot of Imbalanced dataset</li>
+</ul>
+<div class="sourceCode" id="cb22"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true"></a><span class="im">from</span> sklearn.datasets <span class="im">import</span> make_classification</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true"></a></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true"></a><span class="co">#------------------------------------------------------------</span></span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true"></a></span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true"></a><span class="co"># create dataset</span></span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true"></a>x, y <span class="op">=</span> make_classification(n_samples<span class="op">=</span><span class="dv">5000</span>,</span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true"></a>                           n_features<span class="op">=</span><span class="dv">2</span>,</span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true"></a>                           n_redundant<span class="op">=</span><span class="dv">0</span>,</span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true"></a>                           random_state<span class="op">=</span><span class="dv">1</span>,</span>
+<span id="cb22-12"><a href="#cb22-12" aria-hidden="true"></a>                           n_clusters_per_class<span class="op">=</span><span class="dv">1</span>,</span>
+<span id="cb22-13"><a href="#cb22-13" aria-hidden="true"></a>                           weights<span class="op">=</span>[<span class="fl">0.9</span>], flip_y<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb22-14"><a href="#cb22-14" aria-hidden="true"></a>x <span class="op">=</span> pd.DataFrame(x)</span>
+<span id="cb22-15"><a href="#cb22-15" aria-hidden="true"></a>y <span class="op">=</span> pd.DataFrame(y)</span>
+<span id="cb22-16"><a href="#cb22-16" aria-hidden="true"></a></span>
+<span id="cb22-17"><a href="#cb22-17" aria-hidden="true"></a><span class="co"># concatinate columns</span></span>
+<span id="cb22-18"><a href="#cb22-18" aria-hidden="true"></a>df <span class="op">=</span> pd.concat([x, y], axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb22-19"><a href="#cb22-19" aria-hidden="true"></a><span class="co"># change column names</span></span>
+<span id="cb22-20"><a href="#cb22-20" aria-hidden="true"></a>df.columns <span class="op">=</span> [<span class="st">&quot;X1&quot;</span>, <span class="st">&quot;X2&quot;</span>, <span class="st">&quot;Y&quot;</span>]</span>
+<span id="cb22-21"><a href="#cb22-21" aria-hidden="true"></a></span>
+<span id="cb22-22"><a href="#cb22-22" aria-hidden="true"></a><span class="co">#------------------------------------------------------------</span></span>
+<span id="cb22-23"><a href="#cb22-23" aria-hidden="true"></a></span>
+<span id="cb22-24"><a href="#cb22-24" aria-hidden="true"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">6</span>,<span class="dv">6</span>))</span>
+<span id="cb22-25"><a href="#cb22-25" aria-hidden="true"></a>plt.scatter(df[<span class="st">&quot;X1&quot;</span>],df[<span class="st">&quot;X2&quot;</span>],c<span class="op">=</span>df[<span class="st">&quot;Y&quot;</span>],alpha<span class="op">=</span><span class="fl">0.6</span>)</span>
+<span id="cb22-26"><a href="#cb22-26" aria-hidden="true"></a>plt.xlabel(<span class="st">&quot;X1&quot;</span>)</span>
+<span id="cb22-27"><a href="#cb22-27" aria-hidden="true"></a>plt.ylabel(<span class="st">&quot;X2&quot;</span>)</span>
+<span id="cb22-28"><a href="#cb22-28" aria-hidden="true"></a>plt.title(<span class="st">&quot;Scatterplot of Imbalanced dataset&quot;</span>)</span>
+<span id="cb22-29"><a href="#cb22-29" aria-hidden="true"></a>plt.show()</span></code></pre></div>
+<ul>
+<li>Bar-Graph of Imbalanced dataset</li>
+</ul>
+<div class="sourceCode" id="cb23"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true"></a><span class="im">from</span> sklearn.datasets <span class="im">import</span> make_classification</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true"></a></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true"></a><span class="co">#------------------------------------------------------------</span></span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true"></a></span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true"></a><span class="co"># create dataset</span></span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true"></a>x, y <span class="op">=</span> make_classification(n_samples<span class="op">=</span><span class="dv">5000</span>,</span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true"></a>                           n_features<span class="op">=</span><span class="dv">2</span>,</span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true"></a>                           n_redundant<span class="op">=</span><span class="dv">0</span>,</span>
+<span id="cb23-11"><a href="#cb23-11" aria-hidden="true"></a>                           random_state<span class="op">=</span><span class="dv">1</span>,</span>
+<span id="cb23-12"><a href="#cb23-12" aria-hidden="true"></a>                           n_clusters_per_class<span class="op">=</span><span class="dv">1</span>,</span>
+<span id="cb23-13"><a href="#cb23-13" aria-hidden="true"></a>                           weights<span class="op">=</span>[<span class="fl">0.9</span>], flip_y<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb23-14"><a href="#cb23-14" aria-hidden="true"></a>x <span class="op">=</span> pd.DataFrame(x)</span>
+<span id="cb23-15"><a href="#cb23-15" aria-hidden="true"></a>y <span class="op">=</span> pd.DataFrame(y)</span>
+<span id="cb23-16"><a href="#cb23-16" aria-hidden="true"></a></span>
+<span id="cb23-17"><a href="#cb23-17" aria-hidden="true"></a><span class="co"># concatinate columns</span></span>
+<span id="cb23-18"><a href="#cb23-18" aria-hidden="true"></a>df <span class="op">=</span> pd.concat([x, y], axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb23-19"><a href="#cb23-19" aria-hidden="true"></a><span class="co"># change column names</span></span>
+<span id="cb23-20"><a href="#cb23-20" aria-hidden="true"></a>df.columns <span class="op">=</span> [<span class="st">&quot;X1&quot;</span>, <span class="st">&quot;X2&quot;</span>, <span class="st">&quot;Y&quot;</span>]</span>
+<span id="cb23-21"><a href="#cb23-21" aria-hidden="true"></a></span>
+<span id="cb23-22"><a href="#cb23-22" aria-hidden="true"></a><span class="co">#------------------------------------------------------------</span></span>
+<span id="cb23-23"><a href="#cb23-23" aria-hidden="true"></a></span>
+<span id="cb23-24"><a href="#cb23-24" aria-hidden="true"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">6</span>,<span class="dv">6</span>))</span>
+<span id="cb23-25"><a href="#cb23-25" aria-hidden="true"></a>plt.hist(df[<span class="st">&quot;Y&quot;</span>])</span>
+<span id="cb23-26"><a href="#cb23-26" aria-hidden="true"></a>plt.xlabel(<span class="st">&quot;Class&quot;</span>)</span>
+<span id="cb23-27"><a href="#cb23-27" aria-hidden="true"></a>plt.ylabel(<span class="st">&quot;Count&quot;</span>)</span>
+<span id="cb23-28"><a href="#cb23-28" aria-hidden="true"></a>plt.title(<span class="st">&quot;Bar-Chart of Imbalanced dataset&quot;</span>)</span>
+<span id="cb23-29"><a href="#cb23-29" aria-hidden="true"></a>plt.show()</span></code></pre></div>
+<ul>
+<li>Print percentage of each class in Imbalanced dataset</li>
+</ul>
+<div class="sourceCode" id="cb24"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true"></a><span class="im">from</span> sklearn.datasets <span class="im">import</span> make_classification</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true"></a></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true"></a><span class="co">#------------------------------------------------------------</span></span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true"></a></span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true"></a><span class="co"># create dataset</span></span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true"></a>x, y <span class="op">=</span> make_classification(n_samples<span class="op">=</span><span class="dv">5000</span>,</span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true"></a>                           n_features<span class="op">=</span><span class="dv">2</span>,</span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true"></a>                           n_redundant<span class="op">=</span><span class="dv">0</span>,</span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true"></a>                           random_state<span class="op">=</span><span class="dv">1</span>,</span>
+<span id="cb24-11"><a href="#cb24-11" aria-hidden="true"></a>                           n_clusters_per_class<span class="op">=</span><span class="dv">1</span>,</span>
+<span id="cb24-12"><a href="#cb24-12" aria-hidden="true"></a>                           weights<span class="op">=</span>[<span class="fl">0.9</span>], flip_y<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb24-13"><a href="#cb24-13" aria-hidden="true"></a>x <span class="op">=</span> pd.DataFrame(x)</span>
+<span id="cb24-14"><a href="#cb24-14" aria-hidden="true"></a>y <span class="op">=</span> pd.DataFrame(y)</span>
+<span id="cb24-15"><a href="#cb24-15" aria-hidden="true"></a></span>
+<span id="cb24-16"><a href="#cb24-16" aria-hidden="true"></a><span class="co"># concatinate columns</span></span>
+<span id="cb24-17"><a href="#cb24-17" aria-hidden="true"></a>df <span class="op">=</span> pd.concat([x, y], axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb24-18"><a href="#cb24-18" aria-hidden="true"></a><span class="co"># change column names</span></span>
+<span id="cb24-19"><a href="#cb24-19" aria-hidden="true"></a>df.columns <span class="op">=</span> [<span class="st">&quot;X1&quot;</span>, <span class="st">&quot;X2&quot;</span>, <span class="st">&quot;Y&quot;</span>]</span>
+<span id="cb24-20"><a href="#cb24-20" aria-hidden="true"></a></span>
+<span id="cb24-21"><a href="#cb24-21" aria-hidden="true"></a><span class="co">#------------------------------------------------------------</span></span>
+<span id="cb24-22"><a href="#cb24-22" aria-hidden="true"></a></span>
+<span id="cb24-23"><a href="#cb24-23" aria-hidden="true"></a><span class="co"># prints percentage of each class in dataset</span></span>
+<span id="cb24-24"><a href="#cb24-24" aria-hidden="true"></a></span>
+<span id="cb24-25"><a href="#cb24-25" aria-hidden="true"></a>total_samples <span class="op">=</span> <span class="bu">len</span>(df)</span>
+<span id="cb24-26"><a href="#cb24-26" aria-hidden="true"></a>counts <span class="op">=</span> df[<span class="st">&quot;Y&quot;</span>].value_counts()</span>
+<span id="cb24-27"><a href="#cb24-27" aria-hidden="true"></a>c_index <span class="op">=</span> counts.index</span>
+<span id="cb24-28"><a href="#cb24-28" aria-hidden="true"></a></span>
+<span id="cb24-29"><a href="#cb24-29" aria-hidden="true"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(c_index)):</span>
+<span id="cb24-30"><a href="#cb24-30" aria-hidden="true"></a>    <span class="bu">print</span>(<span class="ss">f&quot;</span><span class="sc">{</span>c_index[i]<span class="sc">}</span><span class="ss"> class takes over &quot;</span></span>
+<span id="cb24-31"><a href="#cb24-31" aria-hidden="true"></a>          <span class="ss">f&quot;</span><span class="sc">{</span>(counts[i]<span class="op">/</span>total_samples)<span class="op">*</span><span class="dv">100</span><span class="sc">}</span><span class="ss"> % OR </span><span class="sc">{</span>counts[i]<span class="sc">}</span><span class="ss"> samples of dataset&quot;</span>)</span>
+<span id="cb24-32"><a href="#cb24-32" aria-hidden="true"></a></span>
+<span id="cb24-33"><a href="#cb24-33" aria-hidden="true"></a><span class="co">&quot;&quot;&quot;</span></span>
+<span id="cb24-34"><a href="#cb24-34" aria-hidden="true"></a><span class="co">OUTPUT :</span></span>
+<span id="cb24-35"><a href="#cb24-35" aria-hidden="true"></a><span class="co">0 class takes over 90.02 % OR 4501 samples of dataset</span></span>
+<span id="cb24-36"><a href="#cb24-36" aria-hidden="true"></a><span class="co">1 class takes over 9.98 % OR 499 samples of dataset</span></span>
+<span id="cb24-37"><a href="#cb24-37" aria-hidden="true"></a><span class="co">&quot;&quot;&quot;</span></span></code></pre></div>
+<hr />
+<h1 id="automated-eda">AUTOMATED EDA</h1>
+<h4 id="here-we-make-use-of-python-libraries-made-specifically-for-automating-common-eda-tasks-which-also-help-us-analyze-the-datset-more-efficiently-and-fastersome-popular-libraries-are-the-following">Here we make use of python libraries made specifically for automating common EDA tasks which also help us analyze the datset more efficiently and faster,some popular libraries are the following :</h4>
+<ul>
+<li>Pandas Profiling</li>
+<li>DTale</li>
+<li>Klib</li>
+<li>AutoViz</li>
+<li>SweetViz</li>
+</ul>
+<h2 id="pandas-profiling">Pandas Profiling</h2>
+<h4 id="this-library-helps-us-create-detailed-eda-reports-of-our-dataset-with-just-a-single-line-of-codewe-can-also-export-these-report-as-html-or-json.">This library helps us create detailed EDA reports of our dataset with just a single line of code,we can also export these report as html or json.</h4>
+<div class="sourceCode" id="cb25"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true"></a><span class="im">from</span> pandas_profiling <span class="im">import</span> ProfileReport</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true"></a></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true"></a>DATASET_PATH <span class="op">=</span> <span class="vs">r&quot;/content/kc_house_data.csv&quot;</span></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true"></a>df <span class="op">=</span> pd.read_csv(DATASET_PATH)</span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true"></a></span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true"></a><span class="co"># creating EDA report</span></span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true"></a>profile <span class="op">=</span> ProfileReport(df)</span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true"></a></span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true"></a><span class="co"># exporting report as html file</span></span>
+<span id="cb25-11"><a href="#cb25-11" aria-hidden="true"></a>profile.to_file(<span class="st">&quot;Analysis.html&quot;</span>)</span></code></pre></div>
+<h4 id="note-if-you-have-a-large-datasetmake-sure-you-have-gpu-orelse-use-google-colab.">NOTE : If you have a large dataset,make sure you have GPU orelse use Google Colab.</h4>
+<div data-align="center">
+<p><Img src="/Images/pandas_profiling.gif" width="72%"/></p>
+</div>
+<blockquote>
+<p>see this blog : https://www.analyticsvidhya.com/blog/2021/06/generate-reports-using-pandas-profiling-deploy-using-streamlit/</p>
+</blockquote>
+<h2 id="autoviz">AutoViz</h2>
+<h4 id="there-are-different-libraries-in-python-which-are-used-for-data-visualization-like-matplotlib-seaborn-etc.but-while-using-these-libraries-we-need-to-define-the-type-of-graph-to-visualize-and-arguments-which-we-need-to-visualize.autoviz-performs-automatic-data-visualization-of-any-dataset-with-just-one-line-of-code.-autoviz-can-find-the-most-important-features-and-plot-impactful-visualizations-only-using-those-automatically-selected-features.">There are different libraries in python which are used for data visualization like Matplotlib, Seaborn etc.But while using these libraries we need to define the type of graph to visualize and arguments which we need to visualize.Autoviz performs automatic data-visualization of any dataset with just one line of code. AutoViz can find the most important features and plot impactful visualizations only using those automatically selected features.</h4>
+<div class="sourceCode" id="cb26"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true"></a><span class="im">from</span> autoviz.AutoViz_Class <span class="im">import</span> AutoViz_Class</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true"></a></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true"></a>AV <span class="op">=</span> AutoViz_Class()</span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true"></a>df <span class="op">=</span> AV.AutoViz(</span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true"></a>    filename<span class="op">=</span>DATASET_PATH,</span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true"></a>    depVar<span class="op">=</span><span class="st">&quot;TARGET_FEATURE&quot;</span>, <span class="co">#target feature</span></span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true"></a>    max_rows_analyzed<span class="op">=</span><span class="dv">100</span>,</span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true"></a>    max_cols_analyzed<span class="op">=</span><span class="dv">5</span>)</span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true"></a></span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true"></a><span class="co"># </span><span class="al">NOTE</span><span class="co"> : use jupyter notebook or google colab.</span></span></code></pre></div>
+<h2 id="sweetviz">SweetViz</h2>
+<h4 id="it-is-a-python-library-that-focuses-on-exploring-the-data-with-the-help-of-beautiful-and-high-density-visualizations.-it-not-only-automates-the-eda-but-is-also-used-for-comparing-datasets-and-drawing-inferences-from-it.we-can-create-a-interactive-report-and-export-it-as-html-file.">It is a python library that focuses on exploring the data with the help of beautiful and high-density visualizations. It not only automates the EDA but is also used for comparing datasets and drawing inferences from it.We can create a interactive report and export it as HTML file.</h4>
+<div class="sourceCode" id="cb27"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true"></a><span class="im">import</span> sweetviz <span class="im">as</span> sv</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true"></a></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true"></a>df <span class="op">=</span> pd.read_csv(DATASET_PATH)</span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true"></a></span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true"></a>sweet_report <span class="op">=</span> sv.analyze(df)</span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true"></a>sweet_report.show_notebook() <span class="co">#display report in jupyter/colab notebook</span></span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true"></a></span>
+<span id="cb27-9"><a href="#cb27-9" aria-hidden="true"></a>sweet_report.show_html(<span class="st">&#39;eda_report.html&#39;</span>)  <span class="co">#save report as html file</span></span></code></pre></div>
+<h1 id="klib">KLib</h1>
+<h4 id="klib-is-a-python-library-that-provides-functions-which-will-help-you-to-explore-clean-and-prepare-your-data-efficiently.">KLib is a python library that provides ‘functions’ which will help you to explore, clean and prepare your data efficiently.</h4>
+<div class="sourceCode" id="cb28"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true"></a><span class="im">import</span> klib</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true"></a></span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true"></a>DATASET_PATH <span class="op">=</span> <span class="st">&quot;C:/Users/dipesh/Desktop/Datasets/kc_house_data.csv&quot;</span></span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true"></a>df <span class="op">=</span> pd.read_csv(DATASET_PATH)</span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true"></a></span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true"></a><span class="co"># FUNCTIONS FOR DATA VISUALIZATION</span></span>
+<span id="cb28-8"><a href="#cb28-8" aria-hidden="true"></a>klib.cat_plot(df)  <span class="co"># Returns a visualisation for number and frequency of categorical features</span></span>
+<span id="cb28-9"><a href="#cb28-9" aria-hidden="true"></a>klib.corr_mat(df)  <span class="co"># Returns a color-encoded correlation matrix (red for -tive relation,black for +tive relation)</span></span>
+<span id="cb28-10"><a href="#cb28-10" aria-hidden="true"></a>klib.corr_plot(df)  <span class="co"># Returns a color-encoded heatmap (ideal for correlations)</span></span>
+<span id="cb28-11"><a href="#cb28-11" aria-hidden="true"></a>klib.dist_plot(df)  <span class="co"># Returns a distribution plot for every numeric feature</span></span>
+<span id="cb28-12"><a href="#cb28-12" aria-hidden="true"></a>klib.missingval_plot(df)  <span class="co"># Returns a figure containing info about missing values</span></span>
+<span id="cb28-13"><a href="#cb28-13" aria-hidden="true"></a></span>
+<span id="cb28-14"><a href="#cb28-14" aria-hidden="true"></a><span class="co"># FUNCTIONS FOR DATA CLEANING</span></span>
+<span id="cb28-15"><a href="#cb28-15" aria-hidden="true"></a>klib.data_cleaning(df)  <span class="co"># performs data-cleaning (drop duplicates &amp; empty rows/cols, adjust dtypes,...)</span></span>
+<span id="cb28-16"><a href="#cb28-16" aria-hidden="true"></a>klib.clean_column_names(df)  <span class="co"># cleans and standardizes column names, also called inside data_cleaning()</span></span>
+<span id="cb28-17"><a href="#cb28-17" aria-hidden="true"></a>klib.convert_datatypes(df)  <span class="co"># converts existing to more efficient dtypes, also called inside data_cleaning()</span></span>
+<span id="cb28-18"><a href="#cb28-18" aria-hidden="true"></a>klib.drop_missing(df)  <span class="co"># drops missing values, also called in data_cleaning()</span></span>
+<span id="cb28-19"><a href="#cb28-19" aria-hidden="true"></a>klib.mv_col_handling(df)  <span class="co"># drops features with high ratio of missing vals based on informational content</span></span>
+<span id="cb28-20"><a href="#cb28-20" aria-hidden="true"></a>klib.pool_duplicate_subsets(df)  <span class="co"># pools subset of cols based on duplicates with min. loss of information</span></span></code></pre></div>
+<blockquote>
+<p>see official docs : https://klib.readthedocs.io/en/latest/</p>
+</blockquote>
+<h2 id="d-tale-not-for-beginners">D-Tale (Not for Beginners)</h2>
+<h4 id="d-tale-generates-an-interactive-gui-in-which-we-can-define-what-we-want-the-data-to-look-like-and-do-analysis-of-data-as-we-like.this-reduces-the-burden-to-write-complex-python-code-for-data-visualization-and-exploration.we-can-apply-filtersdescribe-statistical-characters-and-visualize-data-using-dtale-gui.">D-Tale generates an interactive GUI in which we can define what we want the data to look like and do analysis of data as we like.This reduces the burden to write complex python code for data-visualization and exploration.We can apply filters,describe statistical characters and visualize data using DTale GUI.</h4>
+<div class="sourceCode" id="cb29"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true"></a><span class="co"># Launch DTale app in jupyter/colab notebook</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true"></a></span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true"></a><span class="im">import</span> dtale</span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true"></a></span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true"></a>PATH <span class="op">=</span> <span class="st">&quot;C:/Users/dipesh/Desktop/Datasets/kc_house_data.csv&quot;</span></span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true"></a>df <span class="op">=</span> pd.read_csv(PATH)</span>
+<span id="cb29-8"><a href="#cb29-8" aria-hidden="true"></a></span>
+<span id="cb29-9"><a href="#cb29-9" aria-hidden="true"></a>dtale.show(df)</span></code></pre></div>
+<blockquote>
+<p>see this video : https://youtu.be/xSXGcuiEzUc</p>
+</blockquote>
+<hr />
+<h1 id="feature-engineering-1">FEATURE ENGINEERING</h1>
+<h4 id="in-this-stage-we-use-the-insights-from-previous-stage-to-transform-data-into-more-suitable-formatbelow-are-the-things-we-do-here">In this stage we use the insights from previous stage to transform data into more suitable format,below are the things we do here:</h4>
+<ul>
+<li>Handle missing/null values</li>
+<li>Categorical variables : remove rare labels</li>
+<li>Encode categorical features (label &amp; one-hot encoding)</li>
+<li>Handle outliers in numerical features</li>
+<li>Handle Skewed Distribution in continuous features</li>
+<li>Feature scaling : standarise the variables to the same range</li>
+</ul>
+<h2 id="handle-missing-values">Handle missing values</h2>
+<ul>
+<li>Finding numerical variables with missing/null values and percentage of missing/null values.</li>
+</ul>
+<div class="sourceCode" id="cb30"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true"></a></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true"></a>numerical_with_nan<span class="op">=</span>[feature <span class="cf">for</span> feature <span class="kw">in</span> df.columns <span class="cf">if</span> df[feature].isnull().<span class="bu">sum</span>()<span class="op">&gt;</span><span class="dv">1</span> <span class="kw">and</span> df[feature].dtypes<span class="op">!=</span><span class="st">&#39;O&#39;</span>]</span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true"></a></span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true"></a><span class="bu">print</span>(numerical_with_nan,<span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)</span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true"></a></span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true"></a><span class="cf">for</span> feature <span class="kw">in</span> numerical_with_nan:</span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true"></a>    <span class="bu">print</span>(<span class="st">&quot;</span><span class="sc">{}</span><span class="st">: </span><span class="sc">{}</span><span class="st">% missing value&quot;</span>.<span class="bu">format</span>(feature,np.around(df[feature].isnull().mean(),<span class="dv">4</span>)))</span></code></pre></div>
+<ul>
+<li>Finding categorical variables with missing/null values and percentage of missing/null values.</li>
+</ul>
+<div class="sourceCode" id="cb31"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true"></a></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true"></a>categorical_with_nan<span class="op">=</span>[feature <span class="cf">for</span> feature <span class="kw">in</span> df.columns <span class="cf">if</span> df[feature].isnull().<span class="bu">sum</span>()<span class="op">&gt;</span><span class="dv">1</span> <span class="kw">and</span> df[feature].dtypes<span class="op">==</span><span class="st">&#39;O&#39;</span>]</span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true"></a></span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true"></a><span class="bu">print</span>(categorical_with_nan,<span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)</span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true"></a></span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true"></a><span class="cf">for</span> feature <span class="kw">in</span> categorical_with_nan:</span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true"></a>    <span class="bu">print</span>(<span class="st">&quot;</span><span class="sc">{}</span><span class="st">: </span><span class="sc">{}</span><span class="st">% missing value&quot;</span>.<span class="bu">format</span>(feature,np.around(df[feature].isnull().mean(),<span class="dv">4</span>)))</span></code></pre></div>
+<h4 id="common-ways-to-deal-with-missing-values">Common ways to deal with missing values :</h4>
+<ul>
+<li>Deletion of rows/columns with missing values</li>
+<li>Replace missing values with Mean/Median/Mode of respective feature.</li>
+<li>Create a prediction model to predict missing values</li>
+<li>KNN Imputation</li>
+</ul>
+<blockquote>
+<p>see this blog : https://notes88084.blogspot.com/2021/04/exploratory-data-analysis.html</p>
+</blockquote>
+<div data-align="center">
+<p><img src="/Images/missing_values_graph.png" width="58%"></p>
+</div>
+<h2 id="handle-outliers-in-numerical-features">Handle outliers in numerical features</h2>
+<h4 id="outliers-can-be-of-2-types">Outliers can be of 2 types :</h4>
+<blockquote>
+<ul>
+<li>Artificial : outliers created unintentionally due to error during data collection.</li>
+<li>Natural : outlier which is not artificial.</li>
+</ul>
+</blockquote>
+<div data-align="center">
+<p><img src="/Images/outliers_sensitive.png" width="58%"></p>
+</div>
+<h4 id="common-ways-to-deal-with-outliers">Common ways to deal with outliers :</h4>
+<ul>
+<li>Delete outliers</li>
+<li>Replacing outliers with Mean/Median/Mode (only if outlier is artificial)</li>
+<li>Treat Seperately - If there are significant number of outliers, we should treat them separately.One of the approach is to treat both groups as two different datasets and build individual model for both groups and then combine the output. &gt; see this blog : https://notes88084.blogspot.com/2021/04/exploratory-data-analysis.html</li>
+</ul>
+<h2 id="handle-skewed-distribution-in-continuous-features">Handle Skewed Distribution in continuous features</h2>
+<h4 id="if-the-distributions-are-skewed-right-or-left-skewed-we-may-need-to-transform-them-into-another-format-like-standard-distribution.some-common-transformations-are-mentioned-below">If the distributions are skewed (right or left skewed) we may need to transform them into another format like (Standard Distribution).Some common transformations are mentioned below :</h4>
+<ul>
+<li>Log Transform (mostly used)</li>
+<li>Box Cox Transform</li>
+<li>Square Root Transform</li>
+</ul>
+<h4 id="applying-logarithmic-transformation-to-continuous-features-where-target_feature-is-also-continuous">(Applying Logarithmic Transformation to continuous features where target_feature is also continuous)</h4>
+<div class="sourceCode" id="cb32"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true"></a><span class="cf">for</span> feature <span class="kw">in</span> continuous_features:</span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true"></a>    data<span class="op">=</span>df.copy()</span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true"></a>    <span class="cf">if</span> <span class="dv">0</span> <span class="kw">in</span> data[feature].unique():</span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true"></a>        <span class="cf">pass</span></span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true"></a>    <span class="cf">else</span>:</span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true"></a>        data[feature]<span class="op">=</span>np.log(data[feature])</span>
+<span id="cb32-7"><a href="#cb32-7" aria-hidden="true"></a>        data[<span class="st">&quot;TARGET_FEATURE&quot;</span>]<span class="op">=</span>np.log(data[<span class="st">&quot;TARGET_FEATURE&quot;</span>])</span></code></pre></div>
+<h4 id="note-after-transformation-plot-histograms-again-to-verify-the-change.">NOTE : After transformation plot histograms again to verify the change.</h4>
+<h2 id="categorical-variables-remove-rare-labels">Categorical variables : remove rare labels</h2>
+<h5 id="if-you-have-a-categorical-variable-with-large-number-of-categoriesthen-it-is-possible-that-not-all-of-those-categories-are-contributing-so-much-in-prediction.we-need-to-remove-these-categories.by-remove-we-mean-well-give-these-categories-a-new-labelthis-will-group-these-different-categories-into-a-single-category.">If you have a categorical variable with large number of categories,then it is possible that not all of those categories are contributing so much in prediction.We need to remove these categories.By remove we mean we’ll give these categories a new label,this will group these different categories into a single category.</h5>
+<blockquote>
+<p>see this video : https://youtu.be/AtXNo2c-TYk</p>
+</blockquote>
+<div class="sourceCode" id="cb33"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true"></a><span class="co"># list of categorical features</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true"></a>categorical_features<span class="op">=</span>[feature <span class="cf">for</span> feature <span class="kw">in</span> df.columns <span class="cf">if</span> df[feature].dtype<span class="op">==</span><span class="st">&#39;O&#39;</span>]</span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true"></a></span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true"></a><span class="co"># For each categorical feature replace all the catergories with &quot;Rare_Value&quot; which </span></span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true"></a><span class="co"># are present in less than 1% on entire dataset samples.</span></span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true"></a></span>
+<span id="cb33-7"><a href="#cb33-7" aria-hidden="true"></a><span class="cf">for</span> feature <span class="kw">in</span> categorical_features:</span>
+<span id="cb33-8"><a href="#cb33-8" aria-hidden="true"></a>    temp<span class="op">=</span>df.groupby(feature)[<span class="st">&quot;TARGET_FEATURE&quot;</span>].count()<span class="op">/</span><span class="bu">len</span>(df)</span>
+<span id="cb33-9"><a href="#cb33-9" aria-hidden="true"></a>    temp_df<span class="op">=</span>temp[temp<span class="op">&gt;</span><span class="fl">0.01</span>].index <span class="co"># 0.01 means 1%</span></span>
+<span id="cb33-10"><a href="#cb33-10" aria-hidden="true"></a>    df[feature]<span class="op">=</span>np.where(df[feature].isin(temp_df),df[feature],<span class="st">&#39;Rare_var&#39;</span>)</span></code></pre></div>
+<h2 id="feature-scaling">Feature Scaling</h2>
+<h4 id="here-we-bring-the-values-of-all-features-to-a-common-scale-so-that-difference-in-magnitude-of-feature-values-dont-affect-the-accuracy-of-the-model.when-the-values-in-some-featurescolumns-are-very-high-as-compared-to-rest-of-the-featuresthen-these-features-tend-to-have-high-impact-in-model-prediction-even-if-they-are-far-less-crucial-in-determining-the-output-hence-feature-scaling-must-be-applied-here.">Here we bring the values of all features to a common scale so that difference in magnitude of feature values dont affect the accuracy of the model.When the values in some features/columns are very high as compared to rest of the features,then these features tend to have high impact in model prediction, even if they are far less crucial in determining the output hence feature-scaling must be applied here.</h4>
+<h4 id="note-not-all-models-need-feature-scaling.-tree-based-algorithms-are-fairly-insensitive-to-feature-scaling.algorithms-that-compute-the-distance-between-variables-are-highly-biased-towards-larger-values-hence-need-feature-scaling-egk-meanssvm">Note : Not all models need feature scaling. Tree based algorithms are fairly insensitive to feature scaling.Algorithms that compute the distance between variables are highly biased towards larger values &amp; hence need feature scaling (eg:K-means,SVM)</h4>
+<p>The 2 main types of feature scaling methods :</p>
+<ul>
+<li>Normalization : features will be rescaled to range of [0,1]</li>
+<li>Standardization : features will be rescaled so that they’ll have the properties of a standard normal distribution with mean, μ=0 and standard deviation, σ=1.</li>
+</ul>
+<div data-align="center">
+<p><img src="/Images/feature_scaling.png" width="58%"></p>
+</div>
+<blockquote>
+<p>see this blog : https://notes88084.blogspot.com/2021/04/exploratory-data-analysis.html</p>
+</blockquote>
+<h4 id="normalization-with-sklearn">Normalization with SkLearn</h4>
+<div class="sourceCode" id="cb34"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> MinMaxScaler</span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true"></a></span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true"></a><span class="co"># choose features on which to perform scaling.</span></span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true"></a><span class="co"># Perform scaling only on continuous features which will be used in prediciton.</span></span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true"></a>feature_scale<span class="op">=</span>[feature <span class="cf">for</span> feature <span class="kw">in</span> df.columns <span class="cf">if</span> feature <span class="kw">not</span> <span class="kw">in</span> [<span class="st">&#39;Id&#39;</span>,<span class="st">&#39;Name&#39;</span>] <span class="kw">and</span> df[feature].dtypes<span class="op">!=</span><span class="st">&#39;O&#39;</span>]</span>
+<span id="cb34-6"><a href="#cb34-6" aria-hidden="true"></a></span>
+<span id="cb34-7"><a href="#cb34-7" aria-hidden="true"></a>scaler<span class="op">=</span>MinMaxScaler()</span>
+<span id="cb34-8"><a href="#cb34-8" aria-hidden="true"></a>scaler.fit(df[feature_scale])</span>
+<span id="cb34-9"><a href="#cb34-9" aria-hidden="true"></a>scaled_data <span class="op">=</span> scaler.transform(df[feature_scale]) <span class="co"># returns numpy array</span></span></code></pre></div>
+<h4 id="standardization-with-sklearn">Standardization with SkLearn</h4>
+<div class="sourceCode" id="cb35"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> StandardScaler</span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true"></a></span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true"></a><span class="co"># choose features on which to perform scaling.</span></span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true"></a><span class="co"># Perform scaling only on continuous features which will be used in prediciton.</span></span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true"></a>feature_scale<span class="op">=</span>[feature <span class="cf">for</span> feature <span class="kw">in</span> df.columns <span class="cf">if</span> feature <span class="kw">not</span> <span class="kw">in</span> [<span class="st">&#39;Id&#39;</span>,<span class="st">&#39;Name&#39;</span>] <span class="kw">and</span> df[feature].dtypes<span class="op">!=</span><span class="st">&#39;O&#39;</span>]</span>
+<span id="cb35-6"><a href="#cb35-6" aria-hidden="true"></a></span>
+<span id="cb35-7"><a href="#cb35-7" aria-hidden="true"></a>scaler <span class="op">=</span> StandardScaler()</span>
+<span id="cb35-8"><a href="#cb35-8" aria-hidden="true"></a>scaler.fit(df[feature_scale])</span>
+<span id="cb35-9"><a href="#cb35-9" aria-hidden="true"></a>scaled_data <span class="op">=</span> scaler.transform(df[feature_scale]) <span class="co"># returns numpy array</span></span></code></pre></div>
+<h2 id="encoding-categorical-features">Encoding categorical features</h2>
+<h4 id="many-times-the-data-set-will-contain-categorical-variables-these-variables-are-typically-stored-as-text-values.-in-order-to-use-those-categorical-features-in-a-model-we-have-to-convert-them-into-numerical-format.">Many times the data set will contain categorical variables, these variables are typically stored as text values. In order to use those categorical features in a model we have to convert them into numerical format.</h4>
+<p>There are 2 main types of encoding : * Label Encoding or Ordinal Encoding <strong><em>(used on ordinal categorical features)</em></strong> * One-Hot Encoding <strong><em>(used on nominal categorical features)</em></strong></p>
+<h3 id="label-encoding-with-sklearn">Label-Encoding with SkLearn</h3>
+<div class="sourceCode" id="cb36"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true"></a><span class="im">from</span> sklearn <span class="im">import</span> preprocessing</span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true"></a>label_encoder <span class="op">=</span> preprocessing.LabelEncoder()</span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true"></a></span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true"></a><span class="co"># perform encoding only on categorical features</span></span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true"></a>categorical_features<span class="op">=</span>[feature <span class="cf">for</span> feature <span class="kw">in</span> df.columns <span class="cf">if</span> df[feature].dtype<span class="op">==</span><span class="st">&#39;O&#39;</span>]</span>
+<span id="cb36-6"><a href="#cb36-6" aria-hidden="true"></a></span>
+<span id="cb36-7"><a href="#cb36-7" aria-hidden="true"></a><span class="cf">for</span> feature <span class="kw">in</span> categorical_features:</span>
+<span id="cb36-8"><a href="#cb36-8" aria-hidden="true"></a>    <span class="co"># encode categorical feature</span></span>
+<span id="cb36-9"><a href="#cb36-9" aria-hidden="true"></a>    df[feature] <span class="op">=</span> label_encoder.fit_transform(df[feature])</span>
+<span id="cb36-10"><a href="#cb36-10" aria-hidden="true"></a></span>
+<span id="cb36-11"><a href="#cb36-11" aria-hidden="true"></a><span class="bu">print</span>(df.head())</span></code></pre></div>
+<h3 id="one-hot-encoding-with-pandas">One-Hot Encoding with Pandas</h3>
+<h4 id="note-if-you-have-categorical-features-with-high-cardinality-i.e-large-number-of-categoriesavoid-using-one-hot-encoding-as-itll-create-a-sparse-input-matrix-and-significantly-increase-number-of-columnsfeatures.-also-avoid-falling-into-a-dummy-variable-trap">NOTE : If you have categorical features with high cardinality i.e large number of categories,AVOID using one-hot encoding as it’ll create a sparse input matrix and significantly increase number of columns/features. Also avoid falling into a “DUMMY VARIABLE TRAP”</h4>
+<div class="sourceCode" id="cb37"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true"></a><span class="co"># list of categorical features in dataset</span></span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true"></a>categorical_features<span class="op">=</span>[feature <span class="cf">for</span> feature <span class="kw">in</span> df.columns <span class="cf">if</span> df[feature].dtype<span class="op">==</span><span class="st">&#39;O&#39;</span>]</span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true"></a></span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true"></a><span class="co"># encode categorical features</span></span>
+<span id="cb37-5"><a href="#cb37-5" aria-hidden="true"></a>new_encoded_columns <span class="op">=</span> pd.get_dummies(df[categorical_features])</span>
+<span id="cb37-6"><a href="#cb37-6" aria-hidden="true"></a></span>
+<span id="cb37-7"><a href="#cb37-7" aria-hidden="true"></a><span class="co"># Concatinating with original dataframe</span></span>
+<span id="cb37-8"><a href="#cb37-8" aria-hidden="true"></a>df <span class="op">=</span> pd.concat([df,new_encoded_columns],axis<span class="op">=</span><span class="st">&quot;columns&quot;</span>)</span>
+<span id="cb37-9"><a href="#cb37-9" aria-hidden="true"></a></span>
+<span id="cb37-10"><a href="#cb37-10" aria-hidden="true"></a><span class="co"># dropping the categorical variables since they are redundant now.</span></span>
+<span id="cb37-11"><a href="#cb37-11" aria-hidden="true"></a>df <span class="op">=</span> df.drop(categorical_features,axis<span class="op">=</span><span class="st">&quot;columns&quot;</span>)</span></code></pre></div>
+<div data-align="center">
+<p><img src="EDA Examples/dummy_variable_trap.png" width="58%"></p>
+</div>
+<hr />
+<h1 id="dimensionality-reduction">DIMENSIONALITY REDUCTION</h1>
+<h4 id="dimensionality-reduction-consist-of-2-main-parts">Dimensionality reduction consist of 2 main parts :</h4>
+<ul>
+<li>Feature Selection : we try to select the most optimal features for the model from a given set of existing large number of features.</li>
+<li>Feature Extraction : we reduce the number of features in a dataset by creating new features from the existing ones.</li>
+</ul>
+<p><strong>Feature Selection includes 3 types of methods :</strong> * Filter methods * Wrapper methods * Embedded methods</p>
+<p><strong>Feature Extraction methods :</strong> 1. Principal Component Analysis (PCA) 2. Linear Discriminant Analysis (LDA) 3. t-SNE (Non-Linear) 4. Auto-Encoder</p>
+<blockquote>
+<p>see this blog : https://notes88084.blogspot.com/2021/04/dimensionality-reduction.html</p>
+</blockquote>
+<hr />
+<h2 id="filter-methods-feature-selection">Filter Methods (feature selection)</h2>
+<h4 id="in-filter-methods-the-features-are-selected-on-the-basis-of-their-scores-in-various-statistical-tests-for-their-correlation-with-the-target-variable.">In Filter methods the features are selected on the basis of their scores in various statistical tests for their correlation with the target variable.</h4>
+<p><strong>some common filter methods :</strong> 1. Variance Threshold <em>(for numerical features)</em> 2. Pearson’s Correlation <em>(for numerical features)</em> 3. Chi Square Test <em>(for numerical &amp; categorical features)</em> 4. Information gain <em>(for numerical &amp; categorical features)</em></p>
+<h2 id="variance-threshold-filter-method">Variance Threshold (filter method)</h2>
+<h4 id="this-technique-is-a-quick-and-lightweight-way-of-eliminating-features-with-very-low-variance-features-with-not-much-useful-information.it-removes-all-features-whose-variance-doesnt-meet-some-threshold.by-default-it-removes-all-zero-variance-featuresfeatures-that-have-the-same-or-constant-value-in-all-samples.this-feature-selection-algorithm-looks-only-at-the-features-x-not-the-desired-outputs-y-and-can-thus-be-used-for-unsupervised-learning.">This technique is a quick and lightweight way of eliminating features with very low variance (features with not much useful information).It removes all features whose variance doesn’t meet some threshold.By default, it removes all zero-variance features(features that have the same or constant value in all samples).This feature selection algorithm looks only at the features (X), not the desired outputs (y), and can thus be used for unsupervised learning.</h4>
+<h4 id="note-this-estimator-only-works-with-numeric-data-and-it-will-raise-an-error-if-there-are-categorical-features-present-in-the-dataframe.">NOTE : This estimator only works with numeric data and it will raise an error if there are categorical features present in the dataframe.</h4>
+<div class="sourceCode" id="cb38"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true"></a><span class="im">from</span> sklearn.feature_selection <span class="im">import</span> VarianceThreshold</span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true"></a>THRESHOLD <span class="op">=</span> <span class="fl">0.5</span> <span class="co">#default value is 0</span></span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true"></a>df <span class="op">=</span> pd.read_csv(<span class="st">&quot;train.csv&quot;</span>)</span>
+<span id="cb38-5"><a href="#cb38-5" aria-hidden="true"></a></span>
+<span id="cb38-6"><a href="#cb38-6" aria-hidden="true"></a><span class="co"># Takes a dataframe &amp; threshold,returns a dataframe with low-variance columns removed.</span></span>
+<span id="cb38-7"><a href="#cb38-7" aria-hidden="true"></a><span class="kw">def</span> remove_features(df, threshold):</span>
+<span id="cb38-8"><a href="#cb38-8" aria-hidden="true"></a>    <span class="co"># list of all numerical features in dataset</span></span>
+<span id="cb38-9"><a href="#cb38-9" aria-hidden="true"></a>    numerical_features <span class="op">=</span> [feature <span class="cf">for</span> feature <span class="kw">in</span> df.columns <span class="cf">if</span> df[feature].dtype <span class="op">!=</span> <span class="st">&#39;O&#39;</span>]</span>
+<span id="cb38-10"><a href="#cb38-10" aria-hidden="true"></a></span>
+<span id="cb38-11"><a href="#cb38-11" aria-hidden="true"></a>    <span class="co"># dataframe of numerical features</span></span>
+<span id="cb38-12"><a href="#cb38-12" aria-hidden="true"></a>    df_numerical <span class="op">=</span> df[numerical_features]</span>
+<span id="cb38-13"><a href="#cb38-13" aria-hidden="true"></a></span>
+<span id="cb38-14"><a href="#cb38-14" aria-hidden="true"></a>    vt <span class="op">=</span> VarianceThreshold(threshold)</span>
+<span id="cb38-15"><a href="#cb38-15" aria-hidden="true"></a>    vt.fit(df_numerical)</span>
+<span id="cb38-16"><a href="#cb38-16" aria-hidden="true"></a></span>
+<span id="cb38-17"><a href="#cb38-17" aria-hidden="true"></a>    <span class="co"># list of selected columns</span></span>
+<span id="cb38-18"><a href="#cb38-18" aria-hidden="true"></a>    selected_columns <span class="op">=</span> df_numerical.columns[vt.get_support()]</span>
+<span id="cb38-19"><a href="#cb38-19" aria-hidden="true"></a></span>
+<span id="cb38-20"><a href="#cb38-20" aria-hidden="true"></a>    <span class="co"># list of columns not selected</span></span>
+<span id="cb38-21"><a href="#cb38-21" aria-hidden="true"></a>    columns_to_remove <span class="op">=</span> []</span>
+<span id="cb38-22"><a href="#cb38-22" aria-hidden="true"></a>    <span class="cf">for</span> column <span class="kw">in</span> df_numerical.columns:</span>
+<span id="cb38-23"><a href="#cb38-23" aria-hidden="true"></a>        <span class="cf">if</span> column <span class="kw">not</span> <span class="kw">in</span> selected_columns:</span>
+<span id="cb38-24"><a href="#cb38-24" aria-hidden="true"></a>            columns_to_remove.append(column)</span>
+<span id="cb38-25"><a href="#cb38-25" aria-hidden="true"></a></span>
+<span id="cb38-26"><a href="#cb38-26" aria-hidden="true"></a>    <span class="bu">print</span>(<span class="st">&quot;Number of Columns Removed : &quot;</span>, <span class="bu">len</span>(columns_to_remove))</span>
+<span id="cb38-27"><a href="#cb38-27" aria-hidden="true"></a>    <span class="bu">print</span>(<span class="st">&quot;List of Removed Columns : &quot;</span>, columns_to_remove)</span>
+<span id="cb38-28"><a href="#cb38-28" aria-hidden="true"></a></span>
+<span id="cb38-29"><a href="#cb38-29" aria-hidden="true"></a>    <span class="co"># removing columns from original dataset</span></span>
+<span id="cb38-30"><a href="#cb38-30" aria-hidden="true"></a>    df <span class="op">=</span> df.drop(columns_to_remove, axis<span class="op">=</span><span class="st">&quot;columns&quot;</span>)</span>
+<span id="cb38-31"><a href="#cb38-31" aria-hidden="true"></a>    <span class="cf">return</span> df</span>
+<span id="cb38-32"><a href="#cb38-32" aria-hidden="true"></a>   </span>
+<span id="cb38-33"><a href="#cb38-33" aria-hidden="true"></a>df <span class="op">=</span> remove_features(df,<span class="dv">5</span>)</span>
+<span id="cb38-34"><a href="#cb38-34" aria-hidden="true"></a>df.head(<span class="dv">10</span>)</span></code></pre></div>
+<h2 id="pearsons-correlation-filter-method">Pearson’s Correlation (filter method)</h2>
+<h4 id="if-two-or-more-variables-are-highly-correlated-among-themselveswe-can-make-an-accurate-prediction-on-the-target-variable-with-just-one-variable.so-removing-other-variables-can-help-to-reduce-the-dimensionality.in-this-method-we-use-pearsons-correlation-as-a-threshold-metric-to-remove-correlated-features.in-short-we-want-the-features-which-are-correlated-with-target-feature-but-avoid-having-features-which-are-correlated-among-themselves.">If two or more variables are highly correlated among themselves,we can make an accurate prediction on the target variable with just one variable.So removing other variables can help to reduce the dimensionality.In this method we use ‘Pearson’s correlation’ as a threshold metric to remove correlated features.In short we want the features which are correlated with target feature but avoid having features which are correlated among themselves.</h4>
+<p><strong>Pearson’s Correlation Coefficient ranges between -1 (negative relation) and +1 (positive relation).</strong></p>
+<h4 id="note-this-only-works-with-numeric-features-and-it-will-raise-an-error-if-there-are-categorical-features-present-in-the-dataframe.it-is-preffered-to-use-mostly-in-regression-problems.">NOTE : This only works with numeric features and it will raise an error if there are categorical features present in the dataframe.It is preffered to use mostly in Regression problems.</h4>
+<div class="sourceCode" id="cb39"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true"></a></span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true"></a>x <span class="op">=</span> pd.read_csv(<span class="st">&quot;train.csv&quot;</span>)</span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true"></a></span>
+<span id="cb39-5"><a href="#cb39-5" aria-hidden="true"></a><span class="co">&quot;&quot;&quot;</span></span>
+<span id="cb39-6"><a href="#cb39-6" aria-hidden="true"></a><span class="co">It takes a dataframe &amp; threshold value for correlation coefficient </span></span>
+<span id="cb39-7"><a href="#cb39-7" aria-hidden="true"></a><span class="co">and returns list of columns to remove.If 2 or more features have </span></span>
+<span id="cb39-8"><a href="#cb39-8" aria-hidden="true"></a><span class="co">correlation coefficient above the threshold then only one of them is kept.</span></span>
+<span id="cb39-9"><a href="#cb39-9" aria-hidden="true"></a></span>
+<span id="cb39-10"><a href="#cb39-10" aria-hidden="true"></a><span class="co">It will remove the first feature that is correlated with </span></span>
+<span id="cb39-11"><a href="#cb39-11" aria-hidden="true"></a><span class="co">any other feature.</span></span>
+<span id="cb39-12"><a href="#cb39-12" aria-hidden="true"></a></span>
+<span id="cb39-13"><a href="#cb39-13" aria-hidden="true"></a><span class="al">NOTE</span><span class="co"> : The below code does&#39;nt consider features with negative correlation,to also include removal of </span></span>
+<span id="cb39-14"><a href="#cb39-14" aria-hidden="true"></a><span class="co">features with high negative correlation,remove the &quot;abs()&quot; in correlation() function below.</span></span>
+<span id="cb39-15"><a href="#cb39-15" aria-hidden="true"></a></span>
+<span id="cb39-16"><a href="#cb39-16" aria-hidden="true"></a><span class="co">&quot;&quot;&quot;</span></span>
+<span id="cb39-17"><a href="#cb39-17" aria-hidden="true"></a></span>
+<span id="cb39-18"><a href="#cb39-18" aria-hidden="true"></a></span>
+<span id="cb39-19"><a href="#cb39-19" aria-hidden="true"></a><span class="kw">def</span> get_correlated_features(dataset, threshold):</span>
+<span id="cb39-20"><a href="#cb39-20" aria-hidden="true"></a>    <span class="co"># list of all numerical features in dataset</span></span>
+<span id="cb39-21"><a href="#cb39-21" aria-hidden="true"></a>    numerical_features <span class="op">=</span> [feature <span class="cf">for</span> feature <span class="kw">in</span> dataset.columns <span class="cf">if</span> dataset[feature].dtype <span class="op">!=</span> <span class="st">&#39;O&#39;</span>]</span>
+<span id="cb39-22"><a href="#cb39-22" aria-hidden="true"></a></span>
+<span id="cb39-23"><a href="#cb39-23" aria-hidden="true"></a>    df_numerical <span class="op">=</span> dataset[numerical_features]</span>
+<span id="cb39-24"><a href="#cb39-24" aria-hidden="true"></a></span>
+<span id="cb39-25"><a href="#cb39-25" aria-hidden="true"></a>    <span class="co"># names of correlated columns to remove</span></span>
+<span id="cb39-26"><a href="#cb39-26" aria-hidden="true"></a>    col_corr <span class="op">=</span> <span class="bu">set</span>()</span>
+<span id="cb39-27"><a href="#cb39-27" aria-hidden="true"></a>    corr_matrix <span class="op">=</span> df_numerical.corr()</span>
+<span id="cb39-28"><a href="#cb39-28" aria-hidden="true"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(corr_matrix.columns)):</span>
+<span id="cb39-29"><a href="#cb39-29" aria-hidden="true"></a>        <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(i):</span>
+<span id="cb39-30"><a href="#cb39-30" aria-hidden="true"></a>            <span class="co"># remove abs() to also consider negative correlation</span></span>
+<span id="cb39-31"><a href="#cb39-31" aria-hidden="true"></a>            <span class="cf">if</span> <span class="bu">abs</span>(corr_matrix.iloc[i, j]) <span class="op">&gt;</span> threshold:</span>
+<span id="cb39-32"><a href="#cb39-32" aria-hidden="true"></a>                colname <span class="op">=</span> corr_matrix.columns[i]</span>
+<span id="cb39-33"><a href="#cb39-33" aria-hidden="true"></a>                col_corr.add(colname)</span>
+<span id="cb39-34"><a href="#cb39-34" aria-hidden="true"></a>    <span class="cf">return</span> <span class="bu">list</span>(col_corr)</span>
+<span id="cb39-35"><a href="#cb39-35" aria-hidden="true"></a></span>
+<span id="cb39-36"><a href="#cb39-36" aria-hidden="true"></a></span>
+<span id="cb39-37"><a href="#cb39-37" aria-hidden="true"></a>correlated_features <span class="op">=</span> get_correlated_features(x, <span class="fl">0.8</span>)</span>
+<span id="cb39-38"><a href="#cb39-38" aria-hidden="true"></a><span class="bu">print</span>(<span class="st">&quot;Columns to Remove : &quot;</span>,correlated_features)</span>
+<span id="cb39-39"><a href="#cb39-39" aria-hidden="true"></a></span>
+<span id="cb39-40"><a href="#cb39-40" aria-hidden="true"></a><span class="co"># remove features from original dataset</span></span>
+<span id="cb39-41"><a href="#cb39-41" aria-hidden="true"></a>x <span class="op">=</span> x.drop(correlated_features, axis<span class="op">=</span><span class="st">&quot;columns&quot;</span>)</span></code></pre></div>
+<hr />
+<h2 id="wrapper-methods-feature-selection">Wrapper Methods (feature selection)</h2>
+<h4 id="in-wrapper-methods-we-try-to-use-a-subset-of-features-and-train-a-model-using-them.-based-on-the-inferences-that-we-draw-from-the-previous-model-we-decide-to-add-or-remove-features-from-your-subset.">In wrapper methods, we try to use a subset of features and train a model using them. Based on the inferences that we draw from the previous model, we decide to add or remove features from your subset.</h4>
+<h3 id="caution-wrapper-methods-are-computationally-very-expensive.">Caution : wrapper methods are computationally very expensive.</h3>
+<p><strong>some common wrapper methods :</strong> 1. Forward selection 2. Backward elimination 3. Recursive feature elimination 4. Genetic Algorithms</p>
+<h4 id="note-one-of-the-most-advanced-algorithms-for-feature-selection-are-genetic-algorithms.these-are-stochastic-methods-for-function-optimization-based-on-the-mechanics-of-natural-genetics-and-biological-evolution.">Note: One of the most advanced algorithms for feature selection are “genetic algorithms”.These are stochastic methods for function optimization based on the mechanics of natural genetics and biological evolution.</h4>
+<h2 id="forward-selection">Forward Selection</h2>
+<h4 id="here-we-begins-with-an-empty-model-and-adds-in-variables-one-by-one.-in-each-forward-step-you-add-the-one-variable-that-gives-the-best-improvement-to-your-models-accuracy.">Here we begins with an empty model and adds in variables one by one. In each forward step, you add the one variable that gives the best improvement to your model’s accuracy.</h4>
+<blockquote>
+<p>Info with Code : https://www.analyticsvidhya.com/blog/2021/04/forward-feature-selection-and-its-implementation/</p>
+</blockquote>
+<h2 id="backward-elimination">Backward Elimination</h2>
+<h4 id="it-is-opposite-of-forward-selection.here-at-first-we-train-model-using-all-variables.in-each-forward-step-you-remove-the-one-variable-that-gives-the-least-impact-to-your-models-accuracy.">It is opposite of Forward-selection.Here at first we train model using all variables.In each forward step, you remove the one variable that gives the least impact to your model’s accuracy.</h4>
+<blockquote>
+<p>Info with Code : https://www.analyticsvidhya.com/blog/2021/04/backward-feature-elimination-and-its-implementation/?utm_source=blog&amp;utm_medium=Forward_Feature_Elimination</p>
+</blockquote>
+<h2 id="recursive-feature-elimination">Recursive Feature Elimination</h2>
+<h4 id="in-this-method-the-model-is-initially-trained-using-all-the-features-after-that-using-some-metric-depending-on-the-model-a-single-or-multiple-features-having-the-least-importance-are-removed-and-the-model-is-trained-again-using-the-remaining-features.this-goes-on-recursively-until-a-desired-number-of-features-are-left-these-features-are-of-highest-importance-to-the-model.it-is-a-type-of-backward-elimination.">In this method the model is initially trained using all the features , after that using some metric (depending on the model) , a single or multiple features having the least importance are removed , and the model is trained again using the remaining features.This goes on recursively until a desired number of features are left , these features are of highest importance to the model.It is a type of Backward Elimination.</h4>
+<h4 id="in-regular-rfe-we-have-to-explicitly-mention-the-desired-number-of-best-features-we-want-which-is-not-a-great-way-of-finding-the-best-features-to-increase-the-accuracy-of-the-model.-hence-we-make-use-of-cross-validation-to-find-the-optimal-number-of-best-features-from-a-given-set-of-features.">In regular RFE we have to explicitly mention the desired number of best features we want , which is not a great way of finding the best features to increase the accuracy of the model. Hence we make use of Cross validation to find the optimal number of best features from a given set of features.</h4>
+<h4 id="there-are-2-types-of-rfe-1-rfe-without-cross-validation-2-rfe-with-cross-validation">There are 2 types of RFE : 1] RFE without Cross Validation 2] RFE with Cross Validation</h4>
+<h3 id="rfe-without-cross-validation">RFE (without Cross Validation)</h3>
+<p>Here we explicitly mention the number of features to be selected.</p>
+<div class="sourceCode" id="cb40"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true"></a><span class="im">from</span> sklearn.feature_selection <span class="im">import</span> RFE</span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true"></a></span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true"></a><span class="co">&quot;&quot;&quot;</span></span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true"></a><span class="co">BEFORE USING RFE : </span></span>
+<span id="cb40-5"><a href="#cb40-5" aria-hidden="true"></a><span class="co">1] Handle Missing Values</span></span>
+<span id="cb40-6"><a href="#cb40-6" aria-hidden="true"></a><span class="co">2] Encode Categorical Features</span></span>
+<span id="cb40-7"><a href="#cb40-7" aria-hidden="true"></a><span class="co">3] Scale all required features</span></span>
+<span id="cb40-8"><a href="#cb40-8" aria-hidden="true"></a><span class="co">&quot;&quot;&quot;</span></span>
+<span id="cb40-9"><a href="#cb40-9" aria-hidden="true"></a></span>
+<span id="cb40-10"><a href="#cb40-10" aria-hidden="true"></a><span class="co"># Returns a list of selected features</span></span>
+<span id="cb40-11"><a href="#cb40-11" aria-hidden="true"></a><span class="kw">def</span> get_optimal_features(x, y, model, num_features):</span>
+<span id="cb40-12"><a href="#cb40-12" aria-hidden="true"></a>    <span class="co"># Takes model &amp; the number of features to select as parameter.</span></span>
+<span id="cb40-13"><a href="#cb40-13" aria-hidden="true"></a>    rfe <span class="op">=</span> RFE(estimator<span class="op">=</span>model, n_features_to_select<span class="op">=</span>num_features, verbose<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb40-14"><a href="#cb40-14" aria-hidden="true"></a></span>
+<span id="cb40-15"><a href="#cb40-15" aria-hidden="true"></a>    rfe.fit(x, y)</span>
+<span id="cb40-16"><a href="#cb40-16" aria-hidden="true"></a></span>
+<span id="cb40-17"><a href="#cb40-17" aria-hidden="true"></a>    <span class="co"># Gets a list containing boolean values -</span></span>
+<span id="cb40-18"><a href="#cb40-18" aria-hidden="true"></a>    <span class="co"># True for best selected features/ False for features that are eliminated.</span></span>
+<span id="cb40-19"><a href="#cb40-19" aria-hidden="true"></a>    boolean_list <span class="op">=</span> rfe.get_support()</span>
+<span id="cb40-20"><a href="#cb40-20" aria-hidden="true"></a></span>
+<span id="cb40-21"><a href="#cb40-21" aria-hidden="true"></a>    column_names <span class="op">=</span> x.columns</span>
+<span id="cb40-22"><a href="#cb40-22" aria-hidden="true"></a>    <span class="co"># list of selected features</span></span>
+<span id="cb40-23"><a href="#cb40-23" aria-hidden="true"></a>    optimal_features <span class="op">=</span> column_names[boolean_list]</span>
+<span id="cb40-24"><a href="#cb40-24" aria-hidden="true"></a></span>
+<span id="cb40-25"><a href="#cb40-25" aria-hidden="true"></a>    <span class="bu">print</span>(<span class="st">&quot;Selected Features : &quot;</span>, optimal_features)</span>
+<span id="cb40-26"><a href="#cb40-26" aria-hidden="true"></a>    <span class="cf">return</span> optimal_features</span>
+<span id="cb40-27"><a href="#cb40-27" aria-hidden="true"></a></span>
+<span id="cb40-28"><a href="#cb40-28" aria-hidden="true"></a>best_features <span class="op">=</span> get_optimal_features(x, y, model, num_features)</span>
+<span id="cb40-29"><a href="#cb40-29" aria-hidden="true"></a><span class="co"># dropping not selected features in original dataset</span></span>
+<span id="cb40-30"><a href="#cb40-30" aria-hidden="true"></a>df <span class="op">=</span> df[best_features]</span></code></pre></div>
+<h3 id="rfe-with-cross-validation">RFE (with Cross Validation)</h3>
+<h4 id="here-we-dont-mention-the-number-of-features-to-be-selected-explicitlyinstead-the-algorithm-selects-the-best-number-of-features-for-us-using-cross-validation.this-requires-more-computation-than-regular-rfe.">Here we dont mention the number of features to be selected explicitly,instead the algorithm selects the best number of features for us using cross-validation.This requires more computation than regular RFE.</h4>
+<div class="sourceCode" id="cb41"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true"></a><span class="im">from</span> sklearn.feature_selection <span class="im">import</span> RFECV</span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true"></a></span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true"></a><span class="co">&quot;&quot;&quot;</span></span>
+<span id="cb41-4"><a href="#cb41-4" aria-hidden="true"></a><span class="co">BEFORE USING RFECV : </span></span>
+<span id="cb41-5"><a href="#cb41-5" aria-hidden="true"></a><span class="co">1] Handle Missing Values</span></span>
+<span id="cb41-6"><a href="#cb41-6" aria-hidden="true"></a><span class="co">2] Encode Categorical Features</span></span>
+<span id="cb41-7"><a href="#cb41-7" aria-hidden="true"></a><span class="co">3] Scale all required features</span></span>
+<span id="cb41-8"><a href="#cb41-8" aria-hidden="true"></a><span class="co">&quot;&quot;&quot;</span></span>
+<span id="cb41-9"><a href="#cb41-9" aria-hidden="true"></a></span>
+<span id="cb41-10"><a href="#cb41-10" aria-hidden="true"></a><span class="co"># Returns a list of selected features</span></span>
+<span id="cb41-11"><a href="#cb41-11" aria-hidden="true"></a><span class="kw">def</span> get_optimal_features(x, y, model):</span>
+<span id="cb41-12"><a href="#cb41-12" aria-hidden="true"></a>    <span class="co"># Takes model &amp; the number of features to select as parameter.</span></span>
+<span id="cb41-13"><a href="#cb41-13" aria-hidden="true"></a>    rfecv <span class="op">=</span> RFECV(estimator<span class="op">=</span>model, verbose<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb41-14"><a href="#cb41-14" aria-hidden="true"></a></span>
+<span id="cb41-15"><a href="#cb41-15" aria-hidden="true"></a>    rfecv.fit(x, y)</span>
+<span id="cb41-16"><a href="#cb41-16" aria-hidden="true"></a></span>
+<span id="cb41-17"><a href="#cb41-17" aria-hidden="true"></a>    <span class="co"># Gets a list containing boolean values -</span></span>
+<span id="cb41-18"><a href="#cb41-18" aria-hidden="true"></a>    <span class="co"># True for best selected features/ False for features that are eliminated.</span></span>
+<span id="cb41-19"><a href="#cb41-19" aria-hidden="true"></a>    boolean_list <span class="op">=</span> rfecv.get_support()</span>
+<span id="cb41-20"><a href="#cb41-20" aria-hidden="true"></a></span>
+<span id="cb41-21"><a href="#cb41-21" aria-hidden="true"></a>    column_names <span class="op">=</span> x.columns</span>
+<span id="cb41-22"><a href="#cb41-22" aria-hidden="true"></a>    <span class="co"># list of selected features</span></span>
+<span id="cb41-23"><a href="#cb41-23" aria-hidden="true"></a>    optimal_features <span class="op">=</span> column_names[boolean_list]</span>
+<span id="cb41-24"><a href="#cb41-24" aria-hidden="true"></a></span>
+<span id="cb41-25"><a href="#cb41-25" aria-hidden="true"></a>    <span class="bu">print</span>(<span class="st">&quot;Selected Features : &quot;</span>, optimal_features)</span>
+<span id="cb41-26"><a href="#cb41-26" aria-hidden="true"></a>    <span class="cf">return</span> optimal_features</span>
+<span id="cb41-27"><a href="#cb41-27" aria-hidden="true"></a></span>
+<span id="cb41-28"><a href="#cb41-28" aria-hidden="true"></a>best_features <span class="op">=</span> get_optimal_features(x, y, model)</span>
+<span id="cb41-29"><a href="#cb41-29" aria-hidden="true"></a><span class="co"># dropping not selected features in original dataset</span></span>
+<span id="cb41-30"><a href="#cb41-30" aria-hidden="true"></a>df <span class="op">=</span> df[best_features]</span></code></pre></div>
+<hr />
+<h2 id="embedded-methods-feature-selection">Embedded Methods (feature selection)</h2>
+<h4 id="embedded-methods-combine-the-qualities-of-filter-and-wrapper-methods.-its-implemented-by-algorithms-that-have-their-own-built-in-feature-selection-methods.the-most-typical-embedded-technique-is-decision-tree-algorithm.-decision-tree-algorithms-select-a-feature-in-each-recursive-step-of-the-tree-growth-process-and-divide-the-sample-set-into-smaller-subsets.">Embedded methods combine the qualities of filter and wrapper methods. It’s implemented by algorithms that have their own built-in feature selection methods.The most typical embedded technique is decision tree algorithm. Decision tree algorithms select a feature in each recursive step of the tree growth process and divide the sample set into smaller subsets.</h4>
+<h4 id="embedded-methods-complete-the-feature-selection-process-within-the-construction-of-the-machine-learning-algorithm-itself.-in-other-words-they-perform-feature-selection-during-the-model-training-which-is-why-we-call-them-embedded-methods.a-learning-algorithm-takes-advantage-of-its-own-variable-selection-process-and-performs-feature-selection-and-classificationregression-at-the-same-time.">Embedded methods complete the feature selection process within the construction of the machine learning algorithm itself. In other words, they perform feature selection during the model training, which is why we call them embedded methods.A learning algorithm takes advantage of its own variable selection process and performs feature selection and classification/regression at the same time.</h4>
+<p><strong>Some Common Embedded Methods :</strong> 1. Tree Based models (Decision Tree,Random Forest,XGBoost etc) 2. Lasso Regression (L1) 3. Ridge Regression (L2)</p>
+<blockquote>
+<p>Info with Code : https://heartbeat.fritz.ai/hands-on-with-feature-selection-techniques-embedded-methods-84747e814dab</p>
+</blockquote>
+<h3 id="embedded-methods-work-as-follows">Embedded methods work as follows :</h3>
+<ol type="1">
+<li>First, these methods train a machine learning model.</li>
+<li>They then derive feature importance from this model, which is a measure of how much is feature important when making a prediction.</li>
+<li>Finally, they remove non-important features using the derived feature importance.</li>
+</ol>
+<h2 id="feature-selection-with-regularization-model">Feature Selection with Regularization model</h2>
+<div class="sourceCode" id="cb42"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> Lasso</span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true"></a><span class="im">from</span> sklearn.feature_selection <span class="im">import</span> SelectFromModel</span>
+<span id="cb42-4"><a href="#cb42-4" aria-hidden="true"></a></span>
+<span id="cb42-5"><a href="#cb42-5" aria-hidden="true"></a>df <span class="op">=</span> pd.read_csv(<span class="vs">r&quot;santander_dataset.csv&quot;</span>, nrows<span class="op">=</span><span class="dv">1000</span>)</span>
+<span id="cb42-6"><a href="#cb42-6" aria-hidden="true"></a>x <span class="op">=</span> df.drop(<span class="st">&quot;TARGET&quot;</span>, axis<span class="op">=</span><span class="st">&quot;columns&quot;</span>)</span>
+<span id="cb42-7"><a href="#cb42-7" aria-hidden="true"></a>y <span class="op">=</span> df[<span class="st">&quot;TARGET&quot;</span>]</span>
+<span id="cb42-8"><a href="#cb42-8" aria-hidden="true"></a>model <span class="op">=</span> Lasso(alpha<span class="op">=</span><span class="fl">0.005</span>, random_state<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb42-9"><a href="#cb42-9" aria-hidden="true"></a></span>
+<span id="cb42-10"><a href="#cb42-10" aria-hidden="true"></a><span class="co"># returns a list of selected features</span></span>
+<span id="cb42-11"><a href="#cb42-11" aria-hidden="true"></a><span class="kw">def</span> get_important_features(x, y, model):</span>
+<span id="cb42-12"><a href="#cb42-12" aria-hidden="true"></a>    selection <span class="op">=</span> SelectFromModel(model)</span>
+<span id="cb42-13"><a href="#cb42-13" aria-hidden="true"></a>    selection.fit(x, y)</span>
+<span id="cb42-14"><a href="#cb42-14" aria-hidden="true"></a></span>
+<span id="cb42-15"><a href="#cb42-15" aria-hidden="true"></a>    <span class="co"># list of selected features</span></span>
+<span id="cb42-16"><a href="#cb42-16" aria-hidden="true"></a>    selected_features <span class="op">=</span> x.columns[(selection.get_support())]</span>
+<span id="cb42-17"><a href="#cb42-17" aria-hidden="true"></a></span>
+<span id="cb42-18"><a href="#cb42-18" aria-hidden="true"></a>    <span class="bu">print</span>(<span class="st">&quot;No. of Features Selected : &quot;</span>, <span class="bu">len</span>(selected_features))</span>
+<span id="cb42-19"><a href="#cb42-19" aria-hidden="true"></a>    <span class="bu">print</span>(<span class="st">&quot;Features Selected : &quot;</span>, selected_features)</span>
+<span id="cb42-20"><a href="#cb42-20" aria-hidden="true"></a>    <span class="cf">return</span> selected_features</span>
+<span id="cb42-21"><a href="#cb42-21" aria-hidden="true"></a></span>
+<span id="cb42-22"><a href="#cb42-22" aria-hidden="true"></a>best_features <span class="op">=</span> get_important_features(x,y,model)</span>
+<span id="cb42-23"><a href="#cb42-23" aria-hidden="true"></a><span class="co"># dropping un-selected features from original dataset</span></span>
+<span id="cb42-24"><a href="#cb42-24" aria-hidden="true"></a>x <span class="op">=</span> x[best_features]</span></code></pre></div>
+<h2 id="feature-selection-with-tree-based-model">Feature Selection with Tree-Based Model</h2>
+<h4 id="note-for-classification-the-measure-of-impurity-is-either-the-gini-impurity-or-the-information-gainentropy.for-regression-the-measure-of-impurity-is-variance.">NOTE : For classification, the measure of impurity is either the Gini impurity or the information gain/entropy.For regression the measure of impurity is variance.</h4>
+<h4 id="when-training-a-tree-it-is-possible-to-compute-how-much-each-feature-decreases-the-impurity.-the-more-a-feature-decreases-the-impurity-the-more-important-the-feature-is.-in-random-forests-the-impurity-decrease-from-each-feature-can-be-averaged-across-trees-to-determine-the-final-importance-of-the-variable.">when training a tree, it is possible to compute how much each feature decreases the impurity. The more a feature decreases the impurity, the more important the feature is. In random forests, the impurity decrease from each feature can be averaged across trees to determine the final importance of the variable.</h4>
+<blockquote>
+<p>To give a better intuition, features that are selected at the top of the trees are in general more important than features that are selected at the end nodes of the trees, as generally the top splits lead to bigger information gains.</p>
+</blockquote>
+<blockquote>
+<p>Info with Code : https://towardsdatascience.com/feature-selection-using-random-forest-26d7b747597f</p>
+</blockquote>
+<div class="sourceCode" id="cb43"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true"></a><span class="co"># </span><span class="al">NOTE</span><span class="co"> : You can use any other tree-based algorithm (like XGBoost, CatBoost, and many more)</span></span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true"></a></span>
+<span id="cb43-3"><a href="#cb43-3" aria-hidden="true"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb43-4"><a href="#cb43-4" aria-hidden="true"></a><span class="im">from</span> sklearn.feature_selection <span class="im">import</span> SelectFromModel</span>
+<span id="cb43-5"><a href="#cb43-5" aria-hidden="true"></a><span class="im">from</span> sklearn.ensemble <span class="im">import</span> RandomForestClassifier</span>
+<span id="cb43-6"><a href="#cb43-6" aria-hidden="true"></a></span>
+<span id="cb43-7"><a href="#cb43-7" aria-hidden="true"></a><span class="co"># It has 76k rows , 371 columns , hence taking only 10k rows.</span></span>
+<span id="cb43-8"><a href="#cb43-8" aria-hidden="true"></a>df <span class="op">=</span> pd.read_csv(<span class="vs">r&quot;santander_dataset.csv&quot;</span>, nrows<span class="op">=</span><span class="dv">1000</span>)</span>
+<span id="cb43-9"><a href="#cb43-9" aria-hidden="true"></a>x <span class="op">=</span> df.drop(<span class="st">&quot;TARGET&quot;</span>, axis<span class="op">=</span><span class="st">&quot;columns&quot;</span>)</span>
+<span id="cb43-10"><a href="#cb43-10" aria-hidden="true"></a>y <span class="op">=</span> df[<span class="st">&quot;TARGET&quot;</span>]</span>
+<span id="cb43-11"><a href="#cb43-11" aria-hidden="true"></a>model <span class="op">=</span> RandomForestClassifier(n_estimators<span class="op">=</span><span class="dv">100</span>)</span>
+<span id="cb43-12"><a href="#cb43-12" aria-hidden="true"></a></span>
+<span id="cb43-13"><a href="#cb43-13" aria-hidden="true"></a><span class="co"># returns a list of selected features</span></span>
+<span id="cb43-14"><a href="#cb43-14" aria-hidden="true"></a><span class="kw">def</span> get_important_features(x, y, model):</span>
+<span id="cb43-15"><a href="#cb43-15" aria-hidden="true"></a>    selection <span class="op">=</span> SelectFromModel(model)</span>
+<span id="cb43-16"><a href="#cb43-16" aria-hidden="true"></a>    selection.fit(x, y)</span>
+<span id="cb43-17"><a href="#cb43-17" aria-hidden="true"></a></span>
+<span id="cb43-18"><a href="#cb43-18" aria-hidden="true"></a>    <span class="co"># list of selected features</span></span>
+<span id="cb43-19"><a href="#cb43-19" aria-hidden="true"></a>    selected_features <span class="op">=</span> x.columns[(selection.get_support())]</span>
+<span id="cb43-20"><a href="#cb43-20" aria-hidden="true"></a></span>
+<span id="cb43-21"><a href="#cb43-21" aria-hidden="true"></a>    <span class="bu">print</span>(<span class="st">&quot;No. of Features Selected : &quot;</span>, <span class="bu">len</span>(selected_features))</span>
+<span id="cb43-22"><a href="#cb43-22" aria-hidden="true"></a>    <span class="bu">print</span>(<span class="st">&quot;Features Selected : &quot;</span>, selected_features)</span>
+<span id="cb43-23"><a href="#cb43-23" aria-hidden="true"></a>    <span class="cf">return</span> selected_features</span>
+<span id="cb43-24"><a href="#cb43-24" aria-hidden="true"></a></span>
+<span id="cb43-25"><a href="#cb43-25" aria-hidden="true"></a>best_features <span class="op">=</span> get_important_features(x, y, model)</span>
+<span id="cb43-26"><a href="#cb43-26" aria-hidden="true"></a><span class="co"># dropping un-selected features from original dataset</span></span>
+<span id="cb43-27"><a href="#cb43-27" aria-hidden="true"></a>x <span class="op">=</span> x[best_features]</span></code></pre></div>
+<hr />
+<h3 id="ill-keep-updating-this-sheet-and-would-encourage-you-to-do-the-same">(I’ll keep updating this sheet and would encourage you to do the same)</h3>
