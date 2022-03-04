@@ -40,7 +40,7 @@ This checklist can guide you through your Machine Learning projects. There are e
 * Cardinality of Each Categorical Features 
 * Distribution of Numerical Features
 * Detecting Features with most Outliers
-* Finding relationship between Independent & Dependent variables
+* Finding Collinearity and relationship between Independent & Dependent variables
 
 #### NOTE : In Data Analysis our task is only to find insights and not to make any changes (like removing rows/columns or imputing missing values).After this stage we take these insights and make changes to the dataset in the feature engineering stage.Though this is not a hard rule and you can take any required steps as per your task.
 
